@@ -7,13 +7,14 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type UserController struct {
 	UserService services.UserService
 }
 
-func new(userService services.UserService) UserController {
+func New(userService services.UserService) UserController {
 	return UserController{
 		UserService: userService,
 	}
@@ -25,7 +26,8 @@ func (uc *UserController) CreateUser(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 	}
 
-	user.UpdatedAt, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
+	user.CreatedAt, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
+	user.ID = primitive.NewObjectID()
 	err := uc.UserService.CreateUser(&user)
 	if err != nil {
 		ctx.JSON(http.StatusBadGateway, gin.H{"message": err.Error()})
@@ -53,6 +55,7 @@ func (uc *UserController) UpdateUser(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 	}
 	id := ctx.Param("_id")
+	user.UpdatedAt, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
 	_, err := uc.UserService.UpdateUser(&user, &id)
 	if err != nil {
 		ctx.JSON(http.StatusBadGateway, gin.H{"message": err.Error()})
@@ -62,7 +65,12 @@ func (uc *UserController) UpdateUser(ctx *gin.Context) {
 }
 
 func (uc *UserController) DeleteUser(ctx *gin.Context) {
-	ctx.JSON(200, "")
+	id := ctx.Param("_id")
+	err := uc.UserService.DeleteUser(&id)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+	}
+	ctx.JSON(http.StatusOK, "success")
 }
 
 func (uc *UserController) RegisterUserRoutes(rg *gin.RouterGroup) {

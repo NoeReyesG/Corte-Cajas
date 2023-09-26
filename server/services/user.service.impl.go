@@ -36,18 +36,27 @@ func (u *UserServiceImpl) GetUser(_id *string) (*models.User, error) {
 
 func (u *UserServiceImpl) UpdateUser(user *models.User, id *string) (interface{}, error) {
 
-	query := bson.D{bson.E{Key: "_id", Value: id}}
+	filter := bson.D{bson.E{Key: "_id", Value: id}}
 
 	updatedUser := bson.D{
-		bson.E{Key: "name", Value: user.Name},
-		bson.E{Key: "email", Value: user.Email},
-		bson.E{Key: "updated_at", Value: user.UpdatedAt},
+		bson.E{Key: "$set", Value: bson.D{
+			bson.E{Key: "name", Value: user.Name},
+			bson.E{Key: "email", Value: user.Email},
+			bson.E{Key: "updated_at", Value: user.UpdatedAt},
+		},
+		},
 	}
 
-	result, err := u.userCollection.UpdateOne(u.ctx, query, updatedUser)
+	result, err := u.userCollection.UpdateOne(u.ctx, filter, updatedUser)
 	return result, err
 }
 
 func (u *UserServiceImpl) DeleteUser(_id *string) error {
+
+	filter := bson.D{bson.E{Key: "_id", Value: _id}}
+	_, err := u.userCollection.DeleteOne(u.ctx, filter)
+	if err != nil {
+		return err
+	}
 	return nil
 }
