@@ -3,14 +3,32 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { EfectivoComponent } from './efectivo/efectivo.component';
+import { TarjetasComponent } from './tarjetas/tarjetas.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatTableModule} from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatInputModule} from '@angular/material/input'
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EfectivoComponent,
+    TarjetasComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatTabsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatTableModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
