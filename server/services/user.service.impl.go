@@ -5,6 +5,7 @@ import (
 	"server/models"
 
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -27,15 +28,23 @@ func (u *UserServiceImpl) CreateUser(user *models.User) error {
 	return err
 }
 
-func (u *UserServiceImpl) GetUser(_id *string) (*models.User, error) {
+func (u *UserServiceImpl) GetUser(id string) (*models.User, error) {
 	var user *models.User
+	_id, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		return nil, err
+	}
 	query := bson.D{bson.E{Key: "_id", Value: _id}}
-	err := u.userCollection.FindOne(u.ctx, query).Decode(&user)
+	err = u.userCollection.FindOne(u.ctx, query).Decode(&user)
 	return user, err
 }
 
-func (u *UserServiceImpl) UpdateUser(user *models.User, id *string) (interface{}, error) {
+func (u *UserServiceImpl) UpdateUser(user *models.User, _id *string) (*mongo.UpdateResult, error) {
 
+	id, err := primitive.ObjectIDFromHex(*_id)
+	if err != nil {
+		return nil, err
+	}
 	filter := bson.D{bson.E{Key: "_id", Value: id}}
 
 	updatedUser := bson.D{
@@ -48,13 +57,18 @@ func (u *UserServiceImpl) UpdateUser(user *models.User, id *string) (interface{}
 	}
 
 	result, err := u.userCollection.UpdateOne(u.ctx, filter, updatedUser)
+
 	return result, err
 }
 
 func (u *UserServiceImpl) DeleteUser(_id *string) error {
 
-	filter := bson.D{bson.E{Key: "_id", Value: _id}}
-	_, err := u.userCollection.DeleteOne(u.ctx, filter)
+	id, err := primitive.ObjectIDFromHex(*_id)
+	if err != nil {
+		return err
+	}
+	filter := bson.D{bson.E{Key: "_id", Value: id}}
+	_, err = u.userCollection.DeleteOne(u.ctx, filter)
 	if err != nil {
 		return err
 	}

@@ -39,7 +39,8 @@ func (uc *UserController) CreateUser(ctx *gin.Context) {
 
 func (uc *UserController) GetUser(ctx *gin.Context) {
 	id := ctx.Param("_id")
-	user, err := uc.UserService.GetUser(&id)
+
+	user, err := uc.UserService.GetUser(id)
 
 	if err != nil {
 		ctx.JSON(http.StatusBadGateway, gin.H{"message": err.Error()})
@@ -56,9 +57,12 @@ func (uc *UserController) UpdateUser(ctx *gin.Context) {
 	}
 	id := ctx.Param("_id")
 	user.UpdatedAt, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
-	_, err := uc.UserService.UpdateUser(&user, &id)
+	result, err := uc.UserService.UpdateUser(&user, &id)
 	if err != nil {
 		ctx.JSON(http.StatusBadGateway, gin.H{"message": err.Error()})
+	}
+	if result.MatchedCount != 1 {
+
 	}
 
 	ctx.JSON(http.StatusOK, "success")
@@ -76,7 +80,7 @@ func (uc *UserController) DeleteUser(ctx *gin.Context) {
 func (uc *UserController) RegisterUserRoutes(rg *gin.RouterGroup) {
 	userRoute := rg.Group("/user")
 	userRoute.POST("/create", uc.CreateUser)
-	userRoute.GET("/create/:_id", uc.GetUser)
+	userRoute.GET("/get/:_id", uc.GetUser)
 	userRoute.PATCH("/update/:_id", uc.UpdateUser)
 	userRoute.DELETE("/delete/:_id", uc.DeleteUser)
 }
