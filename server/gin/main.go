@@ -19,6 +19,7 @@ var (
 	err            error
 	userCollection *mongo.Collection
 	userController controllers.UserController
+	cashController controllers.CashController
 	userService    services.UserService
 )
 
@@ -40,15 +41,20 @@ func init() {
 
 	// Get a handle to a collection
 	userCollection = db.Collection("users")
+	cashCollection := db.Collection("cash")
 
 	userService = services.NewUserService(userCollection, ctx)
+	cashService := services.NewCashService(cashCollection, ctx)
+
 	userController = controllers.New(userService)
+	cashController = controllers.NewCash(cashService)
 	server = gin.Default()
 }
 func main() {
 	defer client.Disconnect(ctx)
 	basepath := server.Group("/v1")
 	userController.RegisterUserRoutes(basepath)
+	cashController.RegisterCashRoutes(basepath)
 
 	log.Fatal(server.Run(":3000"))
 }

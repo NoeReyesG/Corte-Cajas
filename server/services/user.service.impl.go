@@ -2,11 +2,13 @@ package services
 
 import (
 	"context"
+	"errors"
 	"server/models"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type UserServiceImpl struct {
@@ -23,7 +25,20 @@ func NewUserService(userCollection *mongo.Collection, ctx context.Context) UserS
 
 func (u *UserServiceImpl) CreateUser(user *models.User) error {
 
-	_, err := u.userCollection.InsertOne(u.ctx, user)
+	count, err := u.userCollection.CountDocuments(u.ctx, bson.D{bson.E{Key: "email", Value: user.Email}})
+	if err != nil {
+		return err
+	}
+
+	if count > 0 {
+		return errors.New("Email already exists")
+	}
+
+	//Generating hash password
+	hash, _ := HashPassword(user.Password)
+	user.Password = hash
+
+	_, err = u.userCollection.InsertOne(u.ctx, user)
 
 	return err
 }
@@ -73,4 +88,9 @@ func (u *UserServiceImpl) DeleteUser(_id *string) error {
 		return err
 	}
 	return nil
+}
+
+func HashPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
+	return string(bytes), err
 }

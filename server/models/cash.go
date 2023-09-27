@@ -1,9 +1,14 @@
 package models
 
-import "go.mongodb.org/mongo-driver/bson/primitive"
+import (
+	"time"
+
+	"go.mongodb.org/mongo-driver/bson/primitive"
+)
 
 type CashRegistered struct {
 	ID          primitive.ObjectID `json:"_id" bson:"_id"`
+	UserID      primitive.ObjectID `json:"user_id" bson:"user_id"`
 	OneThousand int32              `json:"oneThousand" bson:"oneThousand"`
 	FiveHundred int32              `json:"fiveHundred" bson:"fiveHundred"`
 	TwoHundred  int32              `json:"twoHundred" bson:"twoHundred"`
@@ -15,4 +20,5 @@ type CashRegistered struct {
 	Two         int32              `json:"two" bson:"two"`
 	One         int32              `json:"one" bson:"one"`
 	FiftyCents  int32              `json:"fiftyCents" bson:"fiftyCents"`
+	CreatedAt   time.Time          `json:"created_at" bson:"created_at"`
 }
