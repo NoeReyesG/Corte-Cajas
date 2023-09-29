@@ -1,7 +1,7 @@
 
 
 export interface moneyValue{
-    valor: number;
-    denominacion: string;
+    value: number;
+    denomination: string;
     subtotal: number;
 }

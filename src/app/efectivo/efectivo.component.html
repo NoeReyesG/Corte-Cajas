@@ -1,4 +1,4 @@
- <form [formGroup]="formCash"> 
+ <form [formGroup]="cashForm"> 
     <table class="w-full table-auto text-center divide-y divide-green-400">
      <thead  class="bg-gray-50">
          <tr>
@@ -10,13 +10,13 @@
      <tbody class="bg-white divide-y divide-gray-300">
         <tr class="whitespace-nowrap" *ngFor="let moneda of valoresBilletesMoneda">
             <td class="px-4 py-2 text-sm text-gray-500">
-                <label for="denominacion.denominacion" >{{moneda.valor | currency}}</label></td>
+                <label for="denominacion.denominacion" >{{moneda.value | currency}}</label></td>
             <td> 
                 <input 
                 class="bg-slate-400 rounded pl-2"
                 id="denominacion.denominacion" 
                 type="number"
-                [formControlName]="moneda.denominacion"
+                [formControlName]="moneda.denomination"
                 (keyup)="calculateSubtotal(moneda)"
                 value="denominacion.valor">
             </td>
@@ -39,3 +39,6 @@
   disabled 
   type="number" 
   [value]="total">
+
+<br>
+<button mat-raised-button color="primary" (click)="saveCash()">Guardar</button>

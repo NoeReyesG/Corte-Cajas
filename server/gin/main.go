@@ -7,6 +7,7 @@ import (
 	"server/controllers"
 	"server/services"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -49,6 +50,7 @@ func init() {
 	userController = controllers.New(userService)
 	cashController = controllers.NewCash(cashService)
 	server = gin.Default()
+	server.Use(cors.Default())
 }
 func main() {
 	defer client.Disconnect(ctx)
