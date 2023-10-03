@@ -90,36 +90,36 @@ export class EfectivoComponent {
     let tellerCash:number = 2000, from: number=10;
     let subtotal: number = 0;
     for (let index = this.valoresBilletesMoneda.length - 1; index >= 0; index--) {
-      const amountPerDenomination: moneyValue = this.valoresBilletesMoneda[index];
-      subtotal= subtotal + amountPerDenomination.subtotal;
+      const moneyValues: moneyValue = this.valoresBilletesMoneda[index];
+      subtotal= subtotal + moneyValues.subtotal;
       if (subtotal >= 2000) {
         from = index;
         break
       }
     }
-
-    //console.log(from)
-    //subtotal = 0
-    let left:number = subtotal-2000, reminder: number= 0;
-    for (let index = from; index <= 9; index++) {
-      const amountPerDenomination: moneyValue = this.valoresBilletesMoneda[index];
-      //this.tellerCashForm.get(amountPerDenomination.denomination)?.setValue(2)
-      //subtotal = subtotal + (amountPerDenomination.subtotal - (amountPerDenomination.subtotal%10))
-      reminder= left%amountPerDenomination.value;
-      console.log(reminder, amountPerDenomination.value);
-      left = Math.trunc(left/amountPerDenomination.value);
-      console.log(left)
-      left=reminder;
-
-    }
-
-    //console.log("index", from, subtotal);
-      //let x:number = Math.trunc(amountPerDenomination.subtotal/denominator);
-      //console.log( amountPerDenomination.denomination);
     
-    // this.valoresBilletesMoneda.reduceRight((amountPerDenomination: moneyValue)=>{
-    //   console.log(i +":", amountPerDenomination);
-    // })
+    this.tellerCashForm.reset();
+    let remainder:number = subtotal-2000, aux: number = 0, amountRequested: number = 0;
+    for (let index = from; index <= 9; index++) {
+      const moneyValues: moneyValue = this.valoresBilletesMoneda[index];
+      let amountPerDenomination = this.cashForm.get(moneyValues.denomination)?.value
+      if ( amountPerDenomination > 0){
+        amountRequested = Math.trunc(remainder/moneyValues.value);
+        
+        
+        
+        if (amountPerDenomination-amountRequested >= 0){
+          this.tellerCashForm.get(moneyValues.denomination)?.setValue(amountPerDenomination-amountRequested);
+          remainder = remainder%moneyValues.value;  
+        }
+        else{
+          this.tellerCashForm.get(moneyValues.denomination)?.setValue(0);
+          remainder = remainder - moneyValues.subtotal;
+        }
+      }
+    }
+    console.log(this.tellerCashForm);
+   
   }
   /**
    * 
