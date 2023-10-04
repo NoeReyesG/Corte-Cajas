@@ -9,7 +9,7 @@ const API_URL = environment.apiUrl;
 @Injectable({
     providedIn: 'root'
 })
-export class cashService {
+export class CashService {
     constructor(private http: HttpClient){}
 
     createCashRegister(cash: Cash): Observable<Object>{
