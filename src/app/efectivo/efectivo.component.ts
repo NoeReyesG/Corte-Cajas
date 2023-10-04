@@ -80,11 +80,30 @@ export class EfectivoComponent {
     fiftyCents: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
   });
 
+  finalCashForm = this.fb.group({
+    oneThousand: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+    fiveHundred: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+    twoHundred: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+    oneHundred: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+    fifty: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+    twenty: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+    ten: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+    five: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+    two: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+    one: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+    fiftyCents: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+  });
   
   /**
    * ngOnInit
    */
   ngOnInit():void{
+    this.initForm('tellerCashForm');
+    this.initForm('cashForm')
+  }
+
+  initForm(form: string): void{
+
   }
 
   /**
@@ -158,7 +177,10 @@ export class EfectivoComponent {
     else{
       this.notificationService.showSuccess("Se realizó el cálculo del fondo fijo correctamente");
     }
+  }
 
+  calculateFinalCash():void{
+    
   }
   /**
    * 
