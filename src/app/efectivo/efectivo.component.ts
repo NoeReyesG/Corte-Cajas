@@ -114,8 +114,7 @@ export class EfectivoComponent {
    * It indicates in tellerCashForm how many billets and coins must save the teller at the end of the day  
    */
   calculateTellerCash(): void{
-    let tellerCash:number = 2000, from: number=10;
-    let subtotal: number = 0;
+    let from: number=10, subtotal: number = 0;
     for (let index = this.valoresBilletesMoneda.length - 1; index >= 0; index--) {
       const moneyValues: moneyValue = this.valoresBilletesMoneda[index];
       subtotal= subtotal + moneyValues.subtotal;
@@ -169,12 +168,21 @@ export class EfectivoComponent {
     this.cashService.createCashRegister(cash).subscribe();
   }
 
-  resetForm():void{
+  /**
+   * 
+   */
+  resetForms():void{
     this.total = 0;
-    this.valoresBilletesMoneda.forEach((subtotal: moneyValue)=>{
-      if (subtotal.subtotal != null){
-        subtotal.subtotal = 0;
+    this.tellerCashTotal = 0;
+    this.cashForm.reset();
+    this.tellerCashForm.reset();
+    this.tellerCashInfo.forEach((currencyInfo: moneyValue)=>{
+      currencyInfo.subtotal = 0;
+    });
+    this.valoresBilletesMoneda.forEach((currencyInfo: moneyValue)=>{
+      if (currencyInfo.subtotal != null){
+        currencyInfo.subtotal = 0;
       } 
-    })
+    });
   }
 }
