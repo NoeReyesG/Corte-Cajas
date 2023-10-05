@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { moneyValue } from '../forms/moneyValues';
 import { Cash } from '../models/cashModel';
 import { CashService } from '../services/cash-service';
@@ -10,100 +10,98 @@ import { NotificationService } from '../services/notification-service';
   templateUrl: './efectivo.component.html',
   styleUrls: ['./efectivo.component.css']
 })
-export class EfectivoComponent {
+export class EfectivoComponent implements OnInit{
 
   constructor(
     private fb: FormBuilder,
     private cashService: CashService,
     private notificationService: NotificationService, 
     ){}
+
   total: number = 0;
-  tellerCashTotal: number = 0; 
+  tellerCashTotal: number = 0;
+  finalCashTotal: number = 0;
+
   headerValues: string[] = [
     "Moneda/billete",
     "Cantidad",
     "Total"
   ]
    
-  valoresBilletesMoneda: Array<moneyValue> = [
-    {value: 1000 , denomination: 'oneThousand', subtotal: 0},
-    {value: 500, denomination: 'fiveHundred', subtotal: 0},
-    {value: 200, denomination: 'twoHundred', subtotal: 0},
-    {value: 100, denomination: 'oneHundred', subtotal: 0}, 
-    {value: 50, denomination: 'fifty', subtotal: 0},
-    {value: 20, denomination: 'twenty', subtotal: 0}, 
-    {value: 10, denomination: 'ten', subtotal: 0},
-    {value: 5, denomination: 'five', subtotal: 0},
-    {value: 2, denomination: 'two', subtotal: 0},
-    {value: 1, denomination: 'one', subtotal: 0},
-    {value: 0.5, denomination: 'fiftyCents', subtotal: 0}
-  ]
-  tellerCashInfo: Array<moneyValue> = [
-    {value: 1000 , denomination: 'oneThousand', subtotal: 0},
-    {value: 500, denomination: 'fiveHundred', subtotal: 0},
-    {value: 200, denomination: 'twoHundred', subtotal: 0},
-    {value: 100, denomination: 'oneHundred', subtotal: 0}, 
-    {value: 50, denomination: 'fifty', subtotal: 0},
-    {value: 20, denomination: 'twenty', subtotal: 0}, 
-    {value: 10, denomination: 'ten', subtotal: 0},
-    {value: 5, denomination: 'five', subtotal: 0},
-    {value: 2, denomination: 'two', subtotal: 0},
-    {value: 1, denomination: 'one', subtotal: 0},
-    {value: 0.5, denomination: 'fiftyCents', subtotal: 0}
-  ]
+  valoresBilletesMoneda: Array<moneyValue> = []
+  tellerCashInfo: Array<moneyValue> = []
+  finalCashInfo: Array<moneyValue> = []
 
-  cashForm = this.fb.group({
-    oneThousand: new FormControl<number|undefined|null>(undefined),
-    fiveHundred: new FormControl<number|undefined|null>(undefined),
-    twoHundred: new FormControl<number|undefined|null>(undefined),
-    oneHundred: new FormControl<number|undefined|null>(undefined),
-    fifty: new FormControl<number|undefined|null>(undefined),
-    twenty: new FormControl<number|undefined|null>(undefined),
-    ten: new FormControl<number|undefined|null>(undefined),
-    five: new FormControl<number|undefined|null>(undefined),
-    two: new FormControl<number|undefined|null>(undefined),
-    one: new FormControl<number|undefined|null>(undefined),
-    fiftyCents: new FormControl<number|undefined|null>(undefined),
-  });
-
-  tellerCashForm = this.fb.group({
-    oneThousand: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-    fiveHundred: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-    twoHundred: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-    oneHundred: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-    fifty: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-    twenty: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-    ten: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-    five: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-    two: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-    one: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-    fiftyCents: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-  });
-
-  finalCashForm = this.fb.group({
-    oneThousand: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-    fiveHundred: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-    twoHundred: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-    oneHundred: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-    fifty: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-    twenty: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-    ten: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-    five: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-    two: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-    one: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-    fiftyCents: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-  });
+  cashForm: FormGroup;
+  tellerCashForm: FormGroup;
+  finalCashForm: FormGroup;
+  
   
   /**
    * ngOnInit
    */
   ngOnInit():void{
-    this.initForm('tellerCashForm');
-    this.initForm('cashForm')
+    this.initForms();
+    this.initTable(this.valoresBilletesMoneda);
+    this.initTable(this.tellerCashInfo);
+    this.initTable(this.finalCashInfo);
   }
 
-  initForm(form: string): void{
-
+  initTable(tableInfo: Array<moneyValue>):void{
+    tableInfo.push(
+    {value: 1000 , denomination: 'oneThousand', subtotal: 0},
+    {value: 500, denomination: 'fiveHundred', subtotal: 0},
+    {value: 200, denomination: 'twoHundred', subtotal: 0},
+    {value: 100, denomination: 'oneHundred', subtotal: 0}, 
+    {value: 50, denomination: 'fifty', subtotal: 0},
+    {value: 20, denomination: 'twenty', subtotal: 0}, 
+    {value: 10, denomination: 'ten', subtotal: 0},
+    {value: 5, denomination: 'five', subtotal: 0},
+    {value: 2, denomination: 'two', subtotal: 0},
+    {value: 1, denomination: 'one', subtotal: 0},
+    {value: 0.5, denomination: 'fiftyCents', subtotal: 0}
+    );
+  }  
+  initForms(): void{
+   this.cashForm = this.fb.group({
+      oneThousand: new FormControl<number|undefined|null>(undefined),
+      fiveHundred: new FormControl<number|undefined|null>(undefined),
+      twoHundred: new FormControl<number|undefined|null>(undefined),
+      oneHundred: new FormControl<number|undefined|null>(undefined),
+      fifty: new FormControl<number|undefined|null>(undefined),
+      twenty: new FormControl<number|undefined|null>(undefined),
+      ten: new FormControl<number|undefined|null>(undefined),
+      five: new FormControl<number|undefined|null>(undefined),
+      two: new FormControl<number|undefined|null>(undefined),
+      one: new FormControl<number|undefined|null>(undefined),
+      fiftyCents: new FormControl<number|undefined|null>(undefined),
+    });
+   this.tellerCashForm = this.fb.group({
+      oneThousand: new FormControl<number|undefined|null>(undefined),
+      fiveHundred: new FormControl<number|undefined|null>(undefined),
+      twoHundred: new FormControl<number|undefined|null>(undefined),
+      oneHundred: new FormControl<number|undefined|null>(undefined),
+      fifty: new FormControl<number|undefined|null>(undefined),
+      twenty: new FormControl<number|undefined|null>(undefined),
+      ten: new FormControl<number|undefined|null>(undefined),
+      five: new FormControl<number|undefined|null>(undefined),
+      two: new FormControl<number|undefined|null>(undefined),
+      one: new FormControl<number|undefined|null>(undefined),
+      fiftyCents: new FormControl<number|undefined|null>(undefined),
+    });
+   this.finalCashForm = this.fb.group({
+      oneThousand: new FormControl<number|undefined|null>(undefined),
+      fiveHundred: new FormControl<number|undefined|null>(undefined),
+      twoHundred: new FormControl<number|undefined|null>(undefined),
+      oneHundred: new FormControl<number|undefined|null>(undefined),
+      fifty: new FormControl<number|undefined|null>(undefined),
+      twenty: new FormControl<number|undefined|null>(undefined),
+      ten: new FormControl<number|undefined|null>(undefined),
+      five: new FormControl<number|undefined|null>(undefined),
+      two: new FormControl<number|undefined|null>(undefined),
+      one: new FormControl<number|undefined|null>(undefined),
+      fiftyCents: new FormControl<number|undefined|null>(undefined),
+    });
   }
 
   /**
@@ -116,7 +114,7 @@ export class EfectivoComponent {
   }
 
   /**
-   * 
+   * It calculates the total of all money captured in cash table 
    */
   calculateTotal():void{
     this.total = 0;
@@ -162,9 +160,14 @@ export class EfectivoComponent {
         }
       }
     }
-    this.calculateSubtotalsTellerCash(); 
+    this.calculateSubtotalsTellerCash();
+     
   }
 
+  /**
+   * It calculates the subtotals values of every currency and calculates the total for the teller-cash cash table
+   *  
+   */
   calculateSubtotalsTellerCash(){
     this.tellerCashTotal = 0; 
     this.tellerCashInfo.forEach((element: moneyValue) => {
@@ -172,18 +175,33 @@ export class EfectivoComponent {
       this.tellerCashTotal = this.tellerCashTotal + element.subtotal;
     });
     if (this.tellerCashTotal != 2000){
+      this.resetTellerCashForm();
       this.notificationService.showWarning('Tas pendejo o qué mijo? Ahi no hay 2 varos');
     }
     else{
+      this.calculateFinalCash();
       this.notificationService.showSuccess("Se realizó el cálculo del fondo fijo correctamente");
     }
   }
 
-  calculateFinalCash():void{
-    
-  }
   /**
-   * 
+   * It calculates the subtotals values of every currency and calculates the total for the final cash table
+   */
+  calculateFinalCash():void{
+    let subtotal = 0;
+    this.finalCashTotal = 0;
+    
+    this.finalCashInfo.forEach((moneyValues: moneyValue)=>{
+      let setValue = this.cashForm.get(moneyValues.denomination).value-this.tellerCashForm.get(moneyValues.denomination).value;
+      this.finalCashForm.get(moneyValues.denomination).setValue(setValue);
+      subtotal = setValue*moneyValues.value
+      moneyValues.subtotal = subtotal;
+      this.finalCashTotal = this.finalCashTotal + (subtotal); 
+    });
+  }
+
+  /**
+   * call the service with end-points to save the total cash table 
    */
   saveCash():void{
     const cash: Cash = new Cash(this.cashForm.value);
@@ -191,20 +209,35 @@ export class EfectivoComponent {
   }
 
   /**
-   * 
+   * reset the three tables of cash. all cash, teller cash and final cash
    */
   resetForms():void{
     this.total = 0;
-    this.tellerCashTotal = 0;
+    this.finalCashTotal = 0;
+
     this.cashForm.reset();
-    this.tellerCashForm.reset();
-    this.tellerCashInfo.forEach((currencyInfo: moneyValue)=>{
+    this.finalCashForm.reset();
+    
+    this.finalCashInfo.forEach((currencyInfo: moneyValue)=>{
       currencyInfo.subtotal = 0;
     });
     this.valoresBilletesMoneda.forEach((currencyInfo: moneyValue)=>{
       if (currencyInfo.subtotal != null){
         currencyInfo.subtotal = 0;
       } 
+    });
+
+    this.resetTellerCashForm();
+  }
+
+  /**
+   * reset all info related with tellercash table 
+   */
+  resetTellerCashForm(): void{
+    this.tellerCashTotal = 0;
+    this.tellerCashForm.reset();
+    this.tellerCashInfo.forEach((currencyInfo: moneyValue)=>{
+      currencyInfo.subtotal = 0;
     });
   }
 }
