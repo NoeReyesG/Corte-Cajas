@@ -15,11 +15,14 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { OnlyDigitsDirective } from './directives/only-digits.directive';
+
 @NgModule({
   declarations: [
     AppComponent,
     EfectivoComponent,
-    TarjetasComponent
+    TarjetasComponent,
+    OnlyDigitsDirective
   ],
   imports: [
     BrowserModule,

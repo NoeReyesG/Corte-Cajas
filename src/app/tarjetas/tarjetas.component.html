@@ -1,1 +1,8 @@
-<p>tarjetas works!</p>
+
+<form [formGroup]="cards">
+    <ng-container *ngFor="let card of cardReceipts.controls index as i">
+        <label [for]="'input'+i">{{i}}</label>
+        <input type="text" [id]="'input'+i" [formControlName]="i" (keyup.enter)="addInput(i)">
+
+    </ng-container>
+</form>
