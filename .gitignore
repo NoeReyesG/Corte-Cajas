@@ -42,3 +42,5 @@ testem.log
 Thumbs.db
 
 src/environment
+server/gin/gin.exe
+server/gin/bin/

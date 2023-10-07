@@ -22,6 +22,9 @@ export class EfectivoComponent implements OnInit{
   tellerCashTotal: number = 0;
   finalCashTotal: number = 0;
 
+  tellerCashCalculated: boolean = false;
+  alert: boolean = false;
+
   headerValues: string[] = [
     "Moneda/billete",
     "Cantidad",
@@ -77,30 +80,30 @@ export class EfectivoComponent implements OnInit{
       fiftyCents: new FormControl<number|undefined|null>(undefined),
     });
    this.tellerCashForm = this.fb.group({
-      oneThousand: new FormControl<number|undefined|null>(undefined),
-      fiveHundred: new FormControl<number|undefined|null>(undefined),
-      twoHundred: new FormControl<number|undefined|null>(undefined),
-      oneHundred: new FormControl<number|undefined|null>(undefined),
-      fifty: new FormControl<number|undefined|null>(undefined),
-      twenty: new FormControl<number|undefined|null>(undefined),
-      ten: new FormControl<number|undefined|null>(undefined),
-      five: new FormControl<number|undefined|null>(undefined),
-      two: new FormControl<number|undefined|null>(undefined),
-      one: new FormControl<number|undefined|null>(undefined),
-      fiftyCents: new FormControl<number|undefined|null>(undefined),
+      oneThousand: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      fiveHundred: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      twoHundred: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      oneHundred: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      fifty: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      twenty: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      ten: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      five: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      two: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      one: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      fiftyCents: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
     });
    this.finalCashForm = this.fb.group({
-      oneThousand: new FormControl<number|undefined|null>(undefined),
-      fiveHundred: new FormControl<number|undefined|null>(undefined),
-      twoHundred: new FormControl<number|undefined|null>(undefined),
-      oneHundred: new FormControl<number|undefined|null>(undefined),
-      fifty: new FormControl<number|undefined|null>(undefined),
-      twenty: new FormControl<number|undefined|null>(undefined),
-      ten: new FormControl<number|undefined|null>(undefined),
-      five: new FormControl<number|undefined|null>(undefined),
-      two: new FormControl<number|undefined|null>(undefined),
-      one: new FormControl<number|undefined|null>(undefined),
-      fiftyCents: new FormControl<number|undefined|null>(undefined),
+      oneThousand: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      fiveHundred: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      twoHundred: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      oneHundred: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      fifty: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      twenty: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      ten: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      five: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      two: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      one: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      fiftyCents: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
     });
   }
 
@@ -108,8 +111,19 @@ export class EfectivoComponent implements OnInit{
    * 
    * @param {moneyValue} moneda 
    */
-  calculateSubtotal(moneda: moneyValue): void{
+  calculateSubtotal(moneda: moneyValue, i: number): void{
+    if (this.tellerCashCalculated) this.alert = true;
+
+    /*Here I noticed that when taping is very, very fast, including tab-key among the pressed keys, 
+    object (moneda: moneyValue) could be not the expected object in array but the following.
+    This is because event keyup is working after tab is pressed, at that point we are place at the
+    following input*/
+    if (i>0){
+      let previousCurrency = this.valoresBilletesMoneda[i-1];
+      previousCurrency.subtotal = this.cashForm.get(previousCurrency.denomination)?.value*previousCurrency.value;
+    }
     moneda.subtotal = this.cashForm.get(moneda.denomination)?.value*moneda.value;
+    
     this.calculateTotal();
   }
 
@@ -198,6 +212,8 @@ export class EfectivoComponent implements OnInit{
       moneyValues.subtotal = subtotal;
       this.finalCashTotal = this.finalCashTotal + (subtotal); 
     });
+    this.tellerCashCalculated = true;
+    this.alert = false;
   }
 
   /**

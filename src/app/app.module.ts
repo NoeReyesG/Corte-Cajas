@@ -36,6 +36,7 @@ import { OnlyDigitsDirective } from './directives/only-digits.directive';
     MatTableModule,
     MatIconModule,
     MatButtonModule,
+    MatTableModule,
     HttpClientModule,
     ToastrModule.forRoot(),
   ],
