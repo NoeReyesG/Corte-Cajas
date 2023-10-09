@@ -24,6 +24,7 @@ export class EfectivoComponent implements OnInit{
 
   tellerCashCalculated: boolean = false;
   alert: boolean = false;
+  fromSessionStorage: boolean = false;
 
   headerValues: string[] = [
     "Moneda/billete",
@@ -44,10 +45,16 @@ export class EfectivoComponent implements OnInit{
    * ngOnInit
    */
   ngOnInit():void{
+    
     this.initForms();
     this.initTable(this.valoresBilletesMoneda);
     this.initTable(this.tellerCashInfo);
     this.initTable(this.finalCashInfo);
+    if (sessionStorage.getItem('cashForm')){
+      let cashFormData = sessionStorage.getItem('cashForm');
+      let cashFormDataJson = JSON.parse(cashFormData);
+      this.loadCashFormData(cashFormDataJson);
+    }
   }
 
   initTable(tableInfo: Array<moneyValue>):void{
@@ -62,7 +69,7 @@ export class EfectivoComponent implements OnInit{
     {value: 5, denomination: 'five', subtotal: 0},
     {value: 2, denomination: 'two', subtotal: 0},
     {value: 1, denomination: 'one', subtotal: 0},
-    {value: 0.5, denomination: 'fiftyCents', subtotal: 0}
+    //{value: 0.5, denomination: 'fiftyCents', subtotal: 0}
     );
   }  
   initForms(): void{
@@ -77,7 +84,7 @@ export class EfectivoComponent implements OnInit{
       five: new FormControl<number|undefined|null>(undefined),
       two: new FormControl<number|undefined|null>(undefined),
       one: new FormControl<number|undefined|null>(undefined),
-      fiftyCents: new FormControl<number|undefined|null>(undefined),
+      //fiftyCents: new FormControl<number|undefined|null>(undefined),
     });
    this.tellerCashForm = this.fb.group({
       oneThousand: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
@@ -90,7 +97,7 @@ export class EfectivoComponent implements OnInit{
       five: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
       two: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
       one: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-      fiftyCents: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      //fiftyCents: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
     });
    this.finalCashForm = this.fb.group({
       oneThousand: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
@@ -103,8 +110,28 @@ export class EfectivoComponent implements OnInit{
       five: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
       two: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
       one: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-      fiftyCents: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      //fiftyCents: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
     });
+  }
+
+  loadCashFormData(cashFormData):void{
+    for (const key in cashFormData){
+      this.cashForm.get(key)?.setValue(cashFormData[key]);
+    }
+    this.calculateCashInputsSubtotals();
+  }
+
+  /**
+   * it recalculates the values when the data comes from sessionstorage
+   */
+  calculateCashInputsSubtotals(): void{
+    this.valoresBilletesMoneda.forEach((currency: moneyValue)=>{
+      currency.subtotal = this.cashForm.get(currency.denomination)?.value*currency.value;
+    });
+    this.fromSessionStorage = true;
+    this.calculateTotal();
+    this.calculateTellerCash();
+    
   }
 
   /**
@@ -190,11 +217,14 @@ export class EfectivoComponent implements OnInit{
     });
     if (this.tellerCashTotal != 2000){
       this.resetTellerCashForm();
-      this.notificationService.showWarning('Tas pendejo o qué mijo? Ahi no hay 2 varos');
+      this.notificationService.showError('Ops! ocurrió un error. Seguimos trabajando para cubrir todos los escenarios');
     }
     else{
       this.calculateFinalCash();
-      this.notificationService.showSuccess("Se realizó el cálculo del fondo fijo correctamente");
+      let values:[] = this.cashForm.getRawValue();
+      let otherValues = JSON.stringify(values);
+      sessionStorage.setItem("cashForm",otherValues)
+      !this.fromSessionStorage? this.notificationService.showSuccess("Se realizó el cálculo del fondo fijo correctamente"): this.fromSessionStorage = false;
     }
   }
 

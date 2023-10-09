@@ -2,18 +2,18 @@
     <mat-label>Agregar voucher</mat-label>
     <input matInput type="number" (keyup.enter)="addInput1($event)" class="border m-3">
 </div>
-<table mat-table [dataSource]="data" class="mat-elevation-z8">
+<!-- <table mat-table [dataSource]="data" class="mat-elevation-z8">
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
+     Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" 
   
-    <!-- Position Column -->
+     Position Column 
     <ng-container matColumnDef="Numero">
       <th mat-header-cell *matHeaderCellDef> No. </th>
       <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
     </ng-container>
   
-    <!-- Name Column -->
+     Name Column 
     <ng-container matColumnDef="Importe">
       <th mat-header-cell *matHeaderCellDef> Importe </th>
       <td mat-cell *matCellDef="let element"> {{element.importe}} </td>
@@ -22,8 +22,35 @@
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-<!-- <table class="table-auto">
+  </table> -->
+
+  <form [formGroup]="cardReceipts" > 
+    <table class="w-full table-auto text-center divide-y divide-green-400">
+        <thead  class="bg-gray-50">
+            <tr>
+                <th class="md:px-6 px-1 py-1.5 text-xs text-gray-500">
+                    No.
+                </th>
+                <th class="md:px-6 px-1 py-1.5 text-xs text-gray-500">
+                    Importe
+                </th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-300">
+            <tr class="whitespace-nowrap" *ngFor="let voucher of vouchers" class="bg-[#9b19f5]">
+                <td class="md:px-4 px-1 py-1.5 text-sm text-white">
+                    <label for="denominacion.denominacion" >{{voucher.numero}}</label>
+                </td>
+                <td class="md:px-4 px-1 py-1.5 text-sm text-white">
+                    {{voucher.importe}} 
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  </form>
+
+<!--
+ <table class="table-auto">
     <thead>
         <tr>
             <th>Cantidad</th>

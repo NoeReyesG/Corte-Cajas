@@ -11,10 +11,14 @@ export class NotificationService {
     ) {}
 
     showSuccess(message: string, title: string = '') {
-        this.toastr.success(message, title)
+        this.toastr.success(message, title);
     }
     
     showWarning(message: string, title: string = '') {
-        this.toastr.warning(message, title)
+        this.toastr.warning(message, title);
+    }
+
+    showError(message: string, title: string = ''){
+        this.toastr.error(message, title);
     }
 }

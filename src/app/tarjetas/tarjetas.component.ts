@@ -17,20 +17,18 @@ export class TarjetasComponent implements OnInit{
     private changeDetector: ChangeDetectorRef,
   ){}
 
-  data = [{numero:0, importe: 0.0}]
+  vouchers = []
  displayedColumns: string[] = ['Numero', 'Importe'];
   ngOnInit(): void {  
   }
   addInput1(event:any){
-    let numero:number = this.data.length + 1,
+    let numero:number = this.vouchers.length + 1,
       importe: number = Number(event.target.value);
 
 
-    this.data.push({numero: numero, importe: importe});
+    this.vouchers.push({numero: numero, importe: importe});
     console.log(event.target.value);
-    console.log(this.data);
-    
-    console.log(this.dataSource.data);
+    event.target.value = null;
     this.changeDetector.detectChanges();
   }
   addInput(index: number):void{
