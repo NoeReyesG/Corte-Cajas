@@ -8,10 +8,15 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class TarjetasComponent implements OnInit{
 
-  dataSource: MatTableDataSource<any>;
-  
+  countCardReceipts: number = 0;
 
-  cardReceipts: FormGroup = this.fb.group([this.fb.control('')])
+
+  // this.myForm = this.fb.group({
+  //   formArray: this.fb.array([this.fb.control('')]),
+  // });
+  cardReceipts: FormGroup = this.fb.group({
+    formArray: this.fb.array([]),
+  })
   constructor(
     private fb: FormBuilder,
     private changeDetector: ChangeDetectorRef,
@@ -19,6 +24,10 @@ export class TarjetasComponent implements OnInit{
 
   vouchers = []
  displayedColumns: string[] = ['Numero', 'Importe'];
+
+ get formArray(): FormArray {
+  return this.cardReceipts.controls["formArray"] as FormArray;
+}
   ngOnInit(): void {  
   }
   addInput1(event:any){
@@ -31,17 +40,34 @@ export class TarjetasComponent implements OnInit{
     event.target.value = null;
     this.changeDetector.detectChanges();
   }
-  addInput(index: number):void{
-    index = index;
-    let i = ""+(index+1)
-    console.log(i);
-    this.cardReceipts.addControl(i, this.fb.control(''));
-    console.log(this.cardReceipts);
-    console.log(`#input${i}`);
-    console.log(document.querySelector<HTMLInputElement>(`#input0`));
-    document.querySelector<HTMLInputElement>(`#input0`).focus();
-    this.changeDetector.detectChanges();
-    this.focusNewInput(`#input${i}`);
+  addInput(event: any):void{
+    let cardValue: number = parseInt(event.target.value),
+    i =   "" + this.countCardReceipts;
+    console.log(cardValue)
+    if (isNaN(cardValue)) return;
+    let control = this.fb.group({});
+    
+    //this.cardReceipts.addControl(i, this.fb.control(cardValue));
+    this.formArray.push(this.fb.group({'cardValue': cardValue}));
+
+    this.countCardReceipts++;
+    console.log(this.formArray);
+    let inputCards: HTMLInputElement = document.querySelector<HTMLInputElement>(`#inputCards`);
+    inputCards.value = "";
+    
+    //this.changeDetector.detectChanges();
+    //this.focusNewInput(`#input${i}`);
+    //this.changeDetector.detectChanges();
+  }
+
+  deleteInput(i:number, from: string):void{
+    switch(from){
+      case 'cards':
+        this.cardReceipts.removeControl(""+i);
+        this.countCardReceipts--;
+        break;
+    }
+    
   }
 
   focusNewInput(id: string):void{

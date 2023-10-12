@@ -16,13 +16,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { OnlyDigitsDirective } from './directives/only-digits.directive';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EfectivoComponent,
     TarjetasComponent,
-    OnlyDigitsDirective
+    OnlyDigitsDirective,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
