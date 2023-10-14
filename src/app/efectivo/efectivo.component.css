@@ -1,3 +1,29 @@
 table input {
     width:100px;
 }
+
+@media print {
+
+    @page{
+        margin-bottom: 0;
+    }
+    section section{
+        display: none;
+    }
+    #finalCashTable{
+        display: block;
+    }
+    #finalCashTable table tbody tr td{
+        color:black;
+        font-weight: bold;
+    }
+    button {
+        display: none;
+    }
+    #printTotalButton{
+        display: none;
+    }
+    #total{
+        display: block;
+    }
+}

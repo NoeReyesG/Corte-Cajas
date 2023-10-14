@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
+import { CardFormElement, CurrencyType } from '../models/cash';
 @Component({
   selector: 'app-tarjetas',
   templateUrl: './tarjetas.component.html',
@@ -10,84 +11,65 @@ export class TarjetasComponent implements OnInit{
 
   cardReceiptsTotal: number = 0;
 
-  // this.myForm = this.fb.group({
-  //   formArray: this.fb.array([this.fb.control('')]),
-  // });
   cardReceipts: FormGroup = this.fb.group({
-    formArray: this.fb.array([]),
-  })
+    receiptsArray: this.fb.array([]),
+  });
   constructor(
     private fb: FormBuilder,
     private changeDetector: ChangeDetectorRef,
   ){}
 
-  vouchers = []
  displayedColumns: string[] = ['Numero', 'Importe'];
 
- get formArray(): FormArray {
-  return this.cardReceipts.controls["formArray"] as FormArray;
+ get receiptsArray(): FormArray<FormGroup<CardFormElement>> {
+  return this.cardReceipts.controls["receiptsArray"] as FormArray<FormGroup<CardFormElement>>;
 }
   ngOnInit(): void {
     if(sessionStorage.getItem('cardValues')){
       let cardReceiptsData = sessionStorage.getItem('cardValues');
       let cardReceiptsDataJson = JSON.parse(cardReceiptsData);
-      console.log(cardReceiptsDataJson);
       this.loadCardReceiptsData(cardReceiptsDataJson);
     }  
   }
 
-  loadCardReceiptsData(data):void{
-    data.formArray.forEach(receipt=>{
-      this.formArray.push(this.fb.group({'cardValue': receipt.cardValue}));
-      console.log(receipt.cardValue);
+  loadCardReceiptsData(data: any):void{
+    data.receiptsArray.forEach((receipt)=>{
+      this.receiptsArray.push(this.fb.group<CardFormElement>({'cardValue': receipt.cardValue}));
+      console.log(receipt);
     })
-    this.calculateTotal('cards')
+    this.calculateTotal('cards');
   }
-  addInput1(event:any){
-    let numero:number = this.vouchers.length + 1,
-      importe: number = Number(event.target.value);
 
 
-    this.vouchers.unshift({numero: numero, importe: importe});
-    console.log(event.target.value);
-    event.target.value = null;
-    this.changeDetector.detectChanges();
-  }
   addInput(event: any):void{
     let cardValue: number = parseInt(event.target.value);
    
-    //console.log(cardValue)
     if (isNaN(cardValue)) return;
-
-    
+ 
     //this.cardReceipts.addControl(i, this.fb.control(cardValue));
-    this.formArray.push(this.fb.group({'cardValue': cardValue}));
+    this.receiptsArray.push(this.fb.group({'cardValue': cardValue}));
 
-    //console.log(this.formArray);
     let inputCards: HTMLInputElement = document.querySelector<HTMLInputElement>(`#inputCards`);
     inputCards.value = "";
     this.calculateTotal('cards');
-    //this.changeDetector.detectChanges();
-    //this.focusNewInput(`#input${i}`);
-    //this.changeDetector.detectChanges();
   }
 
-  deleteInput(i:number, from: string):void{
+  deleteInput(i:number, from: CurrencyType):void{
     switch(from){
       case 'cards':
-        this.formArray.removeAt(i);
+        this.receiptsArray.removeAt(i);
         this.calculateTotal(from);
         break;
     }
     
   }
 
-  calculateTotal(from: string):void{
+  calculateTotal(from: CurrencyType):void{
     
     switch(from){
       case 'cards':
         this.cardReceiptsTotal = 0;
-        this.formArray.controls.forEach(receipt => {
+        this.receiptsArray.controls.forEach(receipt => {
           this.cardReceiptsTotal = this.cardReceiptsTotal + receipt.value.cardValue;
         });
     }

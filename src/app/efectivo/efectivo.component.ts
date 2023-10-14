@@ -286,4 +286,8 @@ export class EfectivoComponent implements OnInit{
       currencyInfo.subtotal = 0;
     });
   }
+
+  printFinalCash():void{
+    window.print();
+  }
 }

@@ -8,6 +8,7 @@ import { TarjetasComponent } from './tarjetas/tarjetas.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTooltipModule } from '@angular/material/tooltip'; 
 import {MatButtonModule} from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input'
@@ -41,6 +42,7 @@ import { HomeComponent } from './home/home.component';
     MatTableModule,
     HttpClientModule,
     MatInputModule,
+    MatTooltipModule,
     ToastrModule.forRoot(),
   ],
   providers: [],
