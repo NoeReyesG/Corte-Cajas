@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatInput } from '@angular/material/input';
 import { CardFormElement, CurrencyType } from '../models/cash';
 @Component({
   selector: 'app-tarjetas',
@@ -10,7 +9,6 @@ import { CardFormElement, CurrencyType } from '../models/cash';
 export class TarjetasComponent implements OnInit{
 
   cardReceiptsTotal: number = 0;
-
   cardReceipts: FormGroup = this.fb.group({
     receiptsArray: this.fb.array([]),
   });
@@ -42,11 +40,12 @@ export class TarjetasComponent implements OnInit{
 
 
   addInput(event: any):void{
-    let cardValue: number = parseInt(event.target.value);
+    let cardValue: number = parseFloat(event.target.value);
    
-    if (isNaN(cardValue)) return;
- 
-    //this.cardReceipts.addControl(i, this.fb.control(cardValue));
+    if (isNaN(cardValue) || cardValue <= 0){
+      return;
+    }
+
     this.receiptsArray.push(this.fb.group({'cardValue': cardValue}));
 
     let inputCards: HTMLInputElement = document.querySelector<HTMLInputElement>(`#inputCards`);

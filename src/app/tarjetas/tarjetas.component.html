@@ -8,11 +8,12 @@
                 class="bg-[#0c4a6e]"
                 id="inputCards"
                 required="true"
-                appOnlyDigits
+                min="0"
                 matInput
                 (keyup.enter)="addInput($event)" >
                 <mat-icon matSuffix class="text-white" (click)="addInput($event)">control_point</mat-icon>
                 <mat-hint>Enter para agregar voucher</mat-hint>
+                
             </mat-form-field>
             <div class="grid justify-items-start">
                 <label for="total" class="p-2 text-gray-600 text-sm font-semibold">Vouchers</label>
@@ -58,10 +59,10 @@
                             <td class="md:px-4 p-1 text-sm text-gray-700">
                                     <input
                                     class="focus:bg-pink-300 focus:text-gray-800 focus:font-semibold bg-indigo-50 outline-none border-indigo-700 rounded pl-2 w-28"  
-                                    type="number" 
+                                    type="number"
+                                    min="0" 
                                     id="input{{i}}" 
                                     formControlName="cardValue"
-                                    appOnlyDigits
                                     (keyup)="calculateTotal('cards')">
                             </td>
                             <td>
