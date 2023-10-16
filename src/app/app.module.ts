@@ -10,6 +10,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip'; 
 import {MatButtonModule} from '@angular/material/button';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input'
 import { MatTabsModule } from '@angular/material/tabs';
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { OnlyDigitsDirective } from './directives/only-digits.directive';
 import { HomeComponent } from './home/home.component';
+import { BankDepositComponent } from './bank-deposit/bank-deposit.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { HomeComponent } from './home/home.component';
     EfectivoComponent,
     TarjetasComponent,
     OnlyDigitsDirective,
-    HomeComponent
+    HomeComponent,
+    BankDepositComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import { HomeComponent } from './home/home.component';
     MatTableModule,
     MatIconModule,
     MatButtonModule,
+    MatCheckboxModule,
     MatTableModule,
     HttpClientModule,
     MatInputModule,
