@@ -20,6 +20,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { OnlyDigitsDirective } from './directives/only-digits.directive';
 import { HomeComponent } from './home/home.component';
 import { BankDepositComponent } from './bank-deposit/bank-deposit.component';
+import { CurrencyTypeComponent } from './currency-type/currency-type.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { BankDepositComponent } from './bank-deposit/bank-deposit.component';
     TarjetasComponent,
     OnlyDigitsDirective,
     HomeComponent,
-    BankDepositComponent
+    BankDepositComponent,
+    CurrencyTypeComponent
   ],
   imports: [
     BrowserModule,

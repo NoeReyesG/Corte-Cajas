@@ -1,0 +1,20 @@
+<section class="grid grid-cols-2 md:grid-cols-3">
+    <!--Cards receipts section-->
+    <section class="p-2">
+        <p class="text-center">Vouchers</p>
+        <app-tarjetas [currencyValues]="cardsValues" 
+        [currencyType]="'cards'" 
+        [tableBGColor]="'#8ecae6'"
+        (emitCurrencyData)="saveCurrency($event, 'cards')"></app-tarjetas>
+    </section>
+    <!-- Checks section -->
+    <section class="p-2">
+        <p class="text-center">Cheques</p>
+        <app-tarjetas 
+        [currencyValues]="checksValues" 
+        [currencyType]="'checks'"
+        [tableBGColor]="'#115f9a'" 
+        (emitCurrencyData)="saveCurrency($event, 'checks')"></app-tarjetas>
+    </section>
+
+</section>

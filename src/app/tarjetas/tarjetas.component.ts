@@ -1,14 +1,22 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CardFormElement, CurrencyType } from '../models/cash';
+import { CurrencyFormElement, CurrencyType } from '../models/cash';
+
 @Component({
   selector: 'app-tarjetas',
   templateUrl: './tarjetas.component.html',
   styleUrls: ['./tarjetas.component.css']
 })
+
 export class TarjetasComponent implements OnInit{
 
-  cardReceiptsTotal: number = 0;
+  @Input() currencyValues: any;
+  @Input() currencyType: CurrencyType;
+  @Input() tableBGColor: string;
+
+  @Output() emitCurrencyData = new EventEmitter<any>();
+  
+  currencyTotal: number = 0;
   cardReceipts: FormGroup = this.fb.group({
     receiptsArray: this.fb.array([]),
   });
@@ -19,62 +27,63 @@ export class TarjetasComponent implements OnInit{
 
  displayedColumns: string[] = ['Numero', 'Importe'];
 
- get receiptsArray(): FormArray<FormGroup<CardFormElement>> {
-  return this.cardReceipts.controls["receiptsArray"] as FormArray<FormGroup<CardFormElement>>;
+ get receiptsArray(): FormArray<FormGroup<CurrencyFormElement>> {
+  return this.cardReceipts.controls["receiptsArray"] as FormArray<FormGroup<CurrencyFormElement>>;
 }
   ngOnInit(): void {
-    if(sessionStorage.getItem('cardValues')){
-      let cardReceiptsData = sessionStorage.getItem('cardValues');
-      let cardReceiptsDataJson = JSON.parse(cardReceiptsData);
-      this.loadCardReceiptsData(cardReceiptsDataJson);
+    console.log(this.tableBGColor);
+    if(this.currencyValues){
+      //console.log(this.currencyValues);
+      let currencyValuesDataJson = JSON.parse(this.currencyValues);
+      this.loadCurrencyValuesData(currencyValuesDataJson);
     }  
   }
 
-  loadCardReceiptsData(data: any):void{
+  loadCurrencyValuesData(data: any):void{
+
     data.receiptsArray.forEach((receipt)=>{
-      this.receiptsArray.push(this.fb.group<CardFormElement>({'cardValue': receipt.cardValue}));
-      console.log(receipt);
+      this.receiptsArray.push(this.fb.group<CurrencyFormElement>({'currencyValue': receipt.currencyValue}));
     })
-    this.calculateTotal('cards');
+
+    this.calculateTotal();
   }
 
 
   addInput(event: any):void{
-    let cardValue: number = parseFloat(event.target.value);
+    let currencyValue: number = parseFloat(event.target.value);
    
-    if (isNaN(cardValue) || cardValue <= 0){
+    if (isNaN(currencyValue) || currencyValue <= 0){
       return;
     }
 
-    this.receiptsArray.push(this.fb.group({'cardValue': cardValue}));
+    this.receiptsArray.push(this.fb.group({'currencyValue': currencyValue}));
 
-    let inputCards: HTMLInputElement = document.querySelector<HTMLInputElement>(`#inputCards`);
+    let inputCards: HTMLInputElement = document.querySelector<HTMLInputElement>(`#input${this.currencyType}`);
     inputCards.value = "";
-    this.calculateTotal('cards');
+    this.calculateTotal();
   }
 
   deleteInput(i:number, from: CurrencyType):void{
     switch(from){
       case 'cards':
         this.receiptsArray.removeAt(i);
-        this.calculateTotal(from);
+        this.calculateTotal();
         break;
     }
     
   }
 
-  calculateTotal(from: CurrencyType):void{
-    
-    switch(from){
-      case 'cards':
-        this.cardReceiptsTotal = 0;
-        this.receiptsArray.controls.forEach(receipt => {
-          this.cardReceiptsTotal = this.cardReceiptsTotal + receipt.value.cardValue;
-        });
-    }
-    
-    let cardvalues = JSON.stringify(this.cardReceipts.getRawValue())
-    sessionStorage.setItem('cardValues', cardvalues);
+  calculateTotal():void{
+
+    this.currencyTotal = 0;
+    this.receiptsArray.controls.forEach(receipt => {
+      this.currencyTotal = this.currencyTotal + receipt.value.currencyValue;
+    });
+
+    let currencyValues = JSON.stringify(this.cardReceipts.getRawValue());
+    //sessionStorage.setItem('cardValues', cardvalues);
+    let data = {'values': currencyValues};
+    this.emitCurrencyData.emit(data);
   }
 
   focusNewInput(id: string):void{
