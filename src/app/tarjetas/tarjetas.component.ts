@@ -14,6 +14,13 @@ export class TarjetasComponent implements OnInit{
   @Input() currencyType: CurrencyType;
   @Input() tableBGColor: string;
 
+  buttonColor = {
+    sky: 'bg-sky-50 border border-sky-500 text-sky-900 dark:text-sky-400 placeholder-sky-700 dark:placeholder-sky-500 text-base font-semibold rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-28 p-1.5 dark:bg-gray-700 dark:border-sky-500',
+    cyan: 'bg-cyan-50 border border-cyan-500 text-cyan-900 dark:text-cyan-400 placeholder-cyan-700 dark:placeholder-cyan-500 text-base font-semibold rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-28 p-1.5 dark:bg-gray-700 dark:border-cyan-500',
+    amber: 'bg-amber-50 border border-amber-500 text-amber-900 dark:text-amber-400 placeholder-amber-700 dark:placeholder-amber-500 text-base font-semibold rounded-lg focus:ring-amber-500 focus:border-amber-500 block w-28 p-1.5 dark:bg-gray-700 dark:border-amber-500',
+    green: 'bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-base font-semibold rounded-lg focus:ring-green-500 focus:border-green-500 block w-28 p-1.5 dark:bg-gray-700 dark:border-green-500'
+  }
+
   @Output() emitCurrencyData = new EventEmitter<any>();
   
   currencyTotal: number = 0;

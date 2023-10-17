@@ -9,14 +9,24 @@ import { CurrencyType } from '../models/cash';
 export class CurrencyTypeComponent implements OnInit{
 cardsValues: string;
 checksValues: string;
+bankDepositsValues: string;
+creditNotesValues: string;
 ngOnInit(){
   let cardReceiptsData = sessionStorage.getItem('cardValues'),
-  checksAmounts = sessionStorage.getItem('checksValues');
+  checksAmounts = sessionStorage.getItem('checksValues'),
+  bankDepositsAmounts = sessionStorage.getItem('bankDepositsValues'),
+  creditNotesAmounts = sessionStorage.getItem('creditNotesValues');
   if(cardReceiptsData){
     this.cardsValues = cardReceiptsData;   
   }
   if(checksAmounts){
     this.checksValues = checksAmounts;   
+  }   
+  if(bankDepositsAmounts){
+    this.bankDepositsValues = bankDepositsAmounts;   
+  }   
+  if(creditNotesAmounts){
+    this.creditNotesValues = creditNotesAmounts;   
   }   
 }
 
@@ -25,10 +35,16 @@ saveCurrency(currencyInfo: any, type:CurrencyType){
     case 'cards':
       console.log(currencyInfo.values);
       sessionStorage.setItem('cardValues', currencyInfo.values);
-      break
+      break;
     case 'checks':
       sessionStorage.setItem('checksValues', currencyInfo.values);
-      break
+      break;
+    case 'bank_deposits':
+      sessionStorage.setItem('bankDepositsValues', currencyInfo.values);
+      break;
+    case 'credit_notes':
+      sessionStorage.setItem('creditNotesValues', currencyInfo.values);
+      break;
   }
 
 }

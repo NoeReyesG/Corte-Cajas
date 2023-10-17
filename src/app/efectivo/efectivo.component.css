@@ -6,6 +6,7 @@ table input {
 
     @page{
         margin-bottom: 0;
+        size: A4 portrait;
     }
     section section{
         display: none;

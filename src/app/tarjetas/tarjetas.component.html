@@ -1,6 +1,6 @@
 
 <div class=" grid grid-cols-2 gap-x-1">
-    <mat-form-field class="mx-1 p-2 col-span-2" color="accent">
+    <mat-form-field class="mx-1 px-2 col-span-2" color="accent">
         <mat-label>Agregar </mat-label>
         <input 
         class="bg-[#0c4a6e] [&::-webkit-inner-spin-button]:appearance-none"
@@ -14,18 +14,18 @@
         <mat-hint>Enter para agregar</mat-hint>
         
     </mat-form-field>
-    <div class="grid justify-items-start">
+    <div class="grid justify-items-start pl-2">
         <label for="total" class="p-2 text-gray-600 text-sm font-semibold">Piezas</label>
         <button
-        class="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-base font-semibold rounded-lg focus:ring-green-500 focus:border-green-500 block w-28 p-1.5 dark:bg-gray-700 dark:border-green-500" 
+        [class]="buttonColor.amber" 
         id="total" 
         > {{receiptsArray.length}}
         </button> 
     </div>
-    <div class="grid justify-items-end">
+    <div class="grid justify-items-end pr-2">
         <label for="total" class="p-2 text-gray-600 text-sm font-semibold">Total</label>
         <button
-        class="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-base font-semibold rounded-lg focus:ring-green-500 focus:border-green-500 block w-28 p-1.5 dark:bg-gray-700 dark:border-green-500" 
+        [class]="buttonColor.sky" 
         id="total" 
         > {{currencyTotal | currency}}
         </button>
@@ -49,7 +49,7 @@
             <tbody class="bg-white divide-y divide-gray-300">
                 <tr 
                 class="whitespace-nowrap" 
-                *ngFor="let input of receiptsArray.controls.slice().reverse(); index as i" class="bg-[{{tableBGColor}}]"
+                *ngFor="let input of receiptsArray.controls.slice().reverse(); index as i" [class]="tableBGColor"
                 [formGroupName]="receiptsArray.length-(i+1)">
                     
                     <td class="md:px-4 p-1 text-sm text-white">
