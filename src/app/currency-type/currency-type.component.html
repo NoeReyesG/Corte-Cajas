@@ -7,7 +7,7 @@
         [tableBGColor]="'bg-[#8ecae6]'"
         (emitCurrencyData)="saveCurrency($event, 'cards')"></app-tarjetas>
     </section>
-    <!-- Checks section -->
+    <!-- Checks section-->
     <section class="p-2">
         <div class="bg-[#115f9a] mx-3"><p class="text-center text-white text-lg font-bold">Cheques</p></div>
         <app-tarjetas 
@@ -16,6 +16,7 @@
         [tableBGColor]="'bg-[#115f9a]'" 
         (emitCurrencyData)="saveCurrency($event, 'checks')"></app-tarjetas>
     </section>
+    <!-- bank deposits section-->
     <section class="p-2">
         <div class="bg-amber-500 mx-3"><p class="text-center text-white text-lg font-bold">Fichas de depósito</p></div>
         <app-tarjetas 
@@ -24,6 +25,7 @@
         [tableBGColor]="'bg-amber-500'" 
         (emitCurrencyData)="saveCurrency($event, 'bank_deposits')"></app-tarjetas>
     </section>
+    <!-- credit notes section-->
     <section class="p-2">
         <div class="bg-purple-700 mx-3"><p class="text-center text-white text-lg font-bold">Notas de Crédito</p></div>
         <app-tarjetas 
