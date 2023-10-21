@@ -11,6 +11,7 @@ cardsValues: string;
 checksValues: string;
 bankDepositsValues: string;
 creditNotesValues: string;
+
 ngOnInit(){
   let cardReceiptsData = sessionStorage.getItem('cardValues'),
   checksAmounts = sessionStorage.getItem('checksValues'),

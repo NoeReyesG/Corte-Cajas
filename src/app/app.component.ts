@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'corte-cajas';
+  clientHeight: number;
+
+  constructor(){
+    this.clientHeight = window.innerHeight;
+  }
 }
