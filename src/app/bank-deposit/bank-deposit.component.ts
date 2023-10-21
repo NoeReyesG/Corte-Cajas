@@ -8,4 +8,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class BankDepositComponent {
 
+  currentDate: Date = new Date();
+
 }

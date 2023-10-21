@@ -69,7 +69,7 @@ export class EfectivoComponent implements OnInit{
     {value: 5, denomination: 'five', subtotal: 0},
     {value: 2, denomination: 'two', subtotal: 0},
     {value: 1, denomination: 'one', subtotal: 0},
-    //{value: 0.5, denomination: 'fiftyCents', subtotal: 0}
+    {value: 0.5, denomination: 'fiftyCents', subtotal: 0}
     );
   }  
   initForms(): void{
@@ -84,7 +84,7 @@ export class EfectivoComponent implements OnInit{
       five: new FormControl<number|undefined|null>(undefined),
       two: new FormControl<number|undefined|null>(undefined),
       one: new FormControl<number|undefined|null>(undefined),
-      //fiftyCents: new FormControl<number|undefined|null>(undefined),
+      fiftyCents: new FormControl<number|undefined|null>(undefined),
     });
    this.tellerCashForm = this.fb.group({
       oneThousand: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
@@ -97,7 +97,7 @@ export class EfectivoComponent implements OnInit{
       five: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
       two: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
       one: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-      //fiftyCents: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      fiftyCents: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
     });
    this.finalCashForm = this.fb.group({
       oneThousand: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
@@ -110,7 +110,7 @@ export class EfectivoComponent implements OnInit{
       five: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
       two: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
       one: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
-      //fiftyCents: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
+      fiftyCents: new FormControl<number|undefined|null>({value: undefined, disabled:true}),
     });
   }
 
@@ -184,7 +184,7 @@ export class EfectivoComponent implements OnInit{
     
     this.tellerCashForm.reset();
     let remainder:number = subtotal-2000, aux: number = 0, amountRequested: number = 0;
-    for (let index = from; index <= 9; index++) {
+    for (let index = from; index <= 10; index++) {
       const moneyValues: moneyValue = this.valoresBilletesMoneda[index];
       let amountPerDenomination = this.cashForm.get(moneyValues.denomination)?.value
       if ( amountPerDenomination > 0){
