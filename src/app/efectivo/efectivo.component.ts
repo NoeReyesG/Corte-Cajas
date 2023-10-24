@@ -4,6 +4,8 @@ import { moneyValue } from '../forms/moneyValues';
 import { Cash } from '../models/cashModel';
 import { CashService } from '../services/cash-service';
 import { NotificationService } from '../services/notification-service';
+import { MatDialog } from '@angular/material/dialog';
+import { TotalsComponent } from '../totals/totals.component';
 
 @Component({
   selector: 'app-efectivo',
@@ -15,6 +17,7 @@ export class EfectivoComponent implements OnInit{
   constructor(
     private fb: FormBuilder,
     private cashService: CashService,
+    private matDialog: MatDialog,
     private notificationService: NotificationService, 
     ){}
 
@@ -289,5 +292,17 @@ export class EfectivoComponent implements OnInit{
 
   printFinalCash():void{
     window.print();
+  }
+
+  openTotals():void {
+    console.log(this.cashService.totals);
+    this.matDialog.open(
+      TotalsComponent, 
+      {
+        width:'350px',
+        data: {
+          totales: this.cashService.totals,
+        },
+      },)
   }
 }

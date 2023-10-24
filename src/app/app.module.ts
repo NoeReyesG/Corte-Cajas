@@ -15,12 +15,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input'
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule} from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { OnlyDigitsDirective } from './directives/only-digits.directive';
 import { HomeComponent } from './home/home.component';
 import { BankDepositComponent } from './bank-deposit/bank-deposit.component';
 import { CurrencyTypeComponent } from './currency-type/currency-type.component';
+import { TotalsComponent } from './totals/totals.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { CurrencyTypeComponent } from './currency-type/currency-type.component';
     OnlyDigitsDirective,
     HomeComponent,
     BankDepositComponent,
-    CurrencyTypeComponent
+    CurrencyTypeComponent,
+    TotalsComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ import { CurrencyTypeComponent } from './currency-type/currency-type.component';
     HttpClientModule,
     MatInputModule,
     MatTooltipModule,
+    MatDialogModule,
     ToastrModule.forRoot(),
   ],
   providers: [],

@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CurrencyFormElement, CurrencyType } from '../models/cash';
+import { CashService } from '../services/cash-service';
 
 @Component({
   selector: 'app-tarjetas',
@@ -14,10 +15,12 @@ export class TarjetasComponent implements OnInit{
   @Input() currencyType: CurrencyType;
   @Input() color: string;
 
+  @Output() emitCurrencyData = new EventEmitter<any>();
+
   colors = {
     sky: {
-      button: 'border text-sky-200 placeholder-sky-500 text-base font-semibold rounded-lg focus:ring-sky-500 focus:border-sky-500 block p-1.5 bg-gray-700 border-sky-500 cursor-default',
-      table: 'bg-[#8ecae6]'
+      button: 'border text-sky-300 placeholder-sky-600 text-base font-semibold rounded-lg focus:ring-sky-600 focus:border-sky-600 block p-1.5 bg-gray-700 border-sky-600 cursor-default',
+      table: 'bg-[#219ebc]'
     }, 
     blue: {
       button: 'border text-blue-400 placeholder-blue-500 text-base font-semibold rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 bg-gray-700 border-blue-500 cursor-default',
@@ -35,7 +38,6 @@ export class TarjetasComponent implements OnInit{
         green: 'bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-base font-semibold rounded-lg focus:ring-green-500 focus:border-green-500 block w-28 p-1.5 dark:bg-gray-700 dark:border-green-500',
   }
 
-  @Output() emitCurrencyData = new EventEmitter<any>();
   
   currencyTotal: number = 0;
   cardReceipts: FormGroup = this.fb.group({
@@ -44,6 +46,7 @@ export class TarjetasComponent implements OnInit{
   constructor(
     private fb: FormBuilder,
     private changeDetector: ChangeDetectorRef,
+    private cashService: CashService,
   ){}
 
  displayedColumns: string[] = ['Numero', 'Importe'];
@@ -101,9 +104,12 @@ export class TarjetasComponent implements OnInit{
     });
 
     let currencyValues = JSON.stringify(this.cardReceipts.getRawValue());
-    //sessionStorage.setItem('cardValues', cardvalues);
     let data = {'values': currencyValues};
     this.emitCurrencyData.emit(data);
+
+    //Set the total in global variable
+    this.cashService.totals.value[this.currencyType] = this.currencyTotal;
+      
   }
 
   focusNewInput(id: string):void{

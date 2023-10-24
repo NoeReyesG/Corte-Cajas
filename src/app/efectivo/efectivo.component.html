@@ -66,7 +66,7 @@ role="alert">
             
             <label for="total" class="p-2 text-gray-800 font-semibold">Total</label>
             <button
-            class="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-base font-semibold rounded-lg focus:ring-green-500 focus:border-green-500 block w-28 p-1.5 dark:bg-gray-700 dark:border-green-500" 
+            class="border text-blue-400 placeholder-blue-500 text-base font-semibold rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-28 p-1. bg-gray-700 border-blue-500 hover:pointer-default" 
             id="total" 
             > {{total | currency}}
             </button>
@@ -117,7 +117,7 @@ role="alert">
         <div class="p-2 flex justify-between">
             <div id="printTotalButton">    
                 <button
-                class="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm font-semibold rounded-lg focus:ring-green-500 focus:border-green-500 block w-28 p-1.5 dark:bg-gray-700 dark:border-green-500" 
+                class=" border text-purple-400 placeholder-purple-500 text-sm font-semibold rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-28 p-1.5 bg-gray-700 border-purple-500" 
                 id="total"
                 matTooltip="Imprimir pico"
                 (click)="printFinalCash()">
@@ -127,7 +127,7 @@ role="alert">
             <div class="flex"> 
                 <label for="total" class="p-2 text-gray-800 font-semibold">Total</label>
                 <button
-                class="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-base font-semibold rounded-lg focus:ring-green-500 focus:border-green-500 block w-28 p-1.5 dark:bg-gray-700 dark:border-green-500" 
+                class="border text-purple-400 placeholder-purple-500 text-base font-semibold rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-28 p-1. bg-gray-700 border-purple-500 hover:pointer-default" 
                 id="total" 
                 > {{finalCashTotal | currency}}
                 </button>
@@ -139,7 +139,7 @@ role="alert">
     <section class="flex-auto mx-3">
         <h3 class="text-gray-700 font-semibold text-center">Retira para tu fondo fijo</h3>
         <form [formGroup]="tellerCashForm"> 
-            <table class="w-full table-auto text-center divide-y divide-green-400">
+            <table class="w-full table-auto text-center divide-y divide-blue-400">
                 <thead  class="bg-gray-50">
                     <tr>
                         <th *ngFor="let headerValue of headerValues" class="md:px-6 px-1 py-1.5 text-xs text-gray-500">
@@ -175,7 +175,7 @@ role="alert">
         <div class= "p-2 flex justify-end px-1.5">
             <label for="tellerCashTotal" class="p-2 text-gray-800 font-semibold">Total</label>
             <button
-            class="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-base font-semibold rounded-lg focus:ring-green-500 focus:border-green-500 block w-28 p-1.5 dark:bg-gray-700 dark:border-green-500" 
+            class="border text-sky-400 placeholder-sky-500 text-base font-semibold rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-28 p-1. bg-gray-700 border-sky-500 hover:pointer-default" 
             id="tellerCashTotal" 
             > {{tellerCashTotal | currency}}
             </button>
@@ -183,21 +183,28 @@ role="alert">
     </section>
 </section>
 
-<section class="flex justify-end px-10">
-    <button mat-raised-button color="primary" class="font-semibold mx-2" (click)="resetForms()">
-        <mat-icon>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="sm:w-5 sm:h-5 w-4 h-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-              </svg>              
-        </mat-icon>
-        Limpiar
-    </button>
-    <button mat-raised-button color="primary" class="font-semibold" (click)="calculateTellerCash()">
-        Calcular fondo
-        <mat-icon>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="sm:w-5 sm:h-5 w-4 h-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z" />
-            </svg>
-        </mat-icon>      
-    </button>
+<section class="flex justify-between px-10">
+    <div>
+        <button mat-raised-button color="primary" class="font-semibold" (click)="openTotals()">
+            <mat-icon>print</mat-icon> Imprimir totales                    
+        </button>
+    </div>
+    <div>
+        <button mat-raised-button color="primary" class="font-semibold mx-2" (click)="resetForms()">
+            <mat-icon>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="sm:w-5 sm:h-5 w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                </svg>              
+            </mat-icon>
+            Limpiar
+        </button>
+        <button mat-raised-button color="primary" class="font-semibold" (click)="calculateTellerCash()">
+            Calcular fondo
+            <mat-icon>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="sm:w-5 sm:h-5 w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z" />
+                </svg>
+            </mat-icon>      
+        </button>
+    </div>  
 </section>

@@ -1,0 +1,25 @@
+<section class="bg-slate-50 p-10 border-4 border-cyan-900 rounded-xl">
+    <div class="flex mb-3">
+        <h1 class="grow text-center font-semibold text-lg text-gray-700 p-3">Totales</h1>
+        <button class="hover:bg-blue-50 rounded-full p-3" (click)="closeDialog()"><mat-icon class="hover:cursor-pointer pt-1">close</mat-icon></button> 
+    </div>
+    
+    <table class="w-full table-auto text-center divide-y divide-purple-400">
+        <thead class="bg-gray-50">
+            <tr class="md:px-6 px-1 py-1.5 text-xs text-gray-500">
+                <th>forma de pago</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-300">
+            <tr *ngFor="let currency of currencies" class="whitespace-nowrap + {{currency.color}}">
+                <td class="md:px-4 p-1 font-semibold text-white">{{currency.displayName}}</td>
+                <td class="md:px-4 p-1 font-semibold text-white">{{data.totales.value[currency.name]}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="flex justify-end py-2 m-2">
+        <button class="border text-sky-200 placeholder-sky-500 text-base font-semibold rounded-lg focus:ring-sky-500 focus:border-sky-500 block p-2 bg-gray-700 border-sky-500"
+        (click)="printTotals()">Imprimir Totales</button>
+    </div>
+</section>
