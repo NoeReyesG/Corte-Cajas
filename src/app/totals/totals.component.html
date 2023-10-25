@@ -1,14 +1,14 @@
-<section class="bg-gray-50 p-8 border-4 border-cyan-900 rounded-xl">
+<section class="bg-gray-500 p-8 border-4 border-gray-400 rounded-xl">
     <div id="header" class="flex mb-3">
-        <h1 class="grow text-center font-semibold text-lg text-gray-700 p-3">Totales</h1>
-        <button class="hover:bg-blue-100 rounded-full p-3" (click)="closeDialog()"><mat-icon class="hover:cursor-pointer pt-1">close</mat-icon></button> 
+        <h1 class="grow text-center font-semibold text-lg text-gray-50 p-2">Totales</h1>
+        <button class="hover:bg-gray-400 rounded-full px-2.5" (click)="closeDialog()"><mat-icon class="hover:cursor-pointer pt-1 text-white">close</mat-icon></button> 
     </div>
-    <div style="display:none">
-        <mat-checkbox color="primary"><span class="text-gray-800">¿Retiraste tu pico?</span></mat-checkbox>
+    <div id="checkWithdrawal">
+        <mat-checkbox color="primary" (change)="finalMoneyWithdrawn($event);">¿Retiraste tu pico?</mat-checkbox>
     </div>
     <table id="totalsTable"class="w-full table-auto text-center divide-y divide-purple-400">
-        <thead class="bg-gray-50">
-            <tr class="md:px-6 px-1 py-1.5 text-xs text-gray-500">
+        <thead class="bg-gray-500">
+            <tr class="md:px-6 px-1 py-1.5 text-xs text-gray-50">
                 <th>forma de pago</th>
                 <th>Total</th>
             </tr>
@@ -21,7 +21,7 @@
         </tbody>
     </table>
     <div id="printButton" class="flex justify-end py-2 m-2">
-        <button class="border text-sky-200 placeholder-sky-500 text-base font-semibold rounded-lg focus:ring-sky-500 focus:border-sky-500 block p-2 bg-gray-700 border-sky-500"
+        <button class=" border text-gray-100 placeholder-gray-500 text-sm font-semibold rounded-lg hover:ring-gray-500 hover:border-gray-400 hover:bg-gray-600 block w-28 p-1.5 bg-gray-700 border-gray-400" 
         (click)="printTotals();"
         matTooltip="Imprimir totales"><mat-icon>print</mat-icon></button>
     </div>

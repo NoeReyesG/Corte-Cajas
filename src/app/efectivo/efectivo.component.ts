@@ -296,15 +296,4 @@ export class EfectivoComponent implements OnInit{
   printFinalCash():void{
     window.print();
   }
-
-  openTotals():void {
-    this.matDialog.open(
-      TotalsComponent, 
-      {
-        width:'350px',
-        data: {
-          totales: this.cashService.totals,
-        },
-      },)
-  }
 }

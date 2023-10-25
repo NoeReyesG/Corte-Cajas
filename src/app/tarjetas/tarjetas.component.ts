@@ -120,4 +120,5 @@ export class TarjetasComponent implements OnInit{
     this.receiptsArray.clear();
     this.calculateTotal();
   }
+  
 }

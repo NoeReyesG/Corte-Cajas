@@ -23,6 +23,7 @@ import { HomeComponent } from './home/home.component';
 import { BankDepositComponent } from './bank-deposit/bank-deposit.component';
 import { CurrencyTypeComponent } from './currency-type/currency-type.component';
 import { TotalsComponent } from './totals/totals.component';
+import { OpenTotalsButtonComponent } from './totals/open-totals-button/open-totals-button.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { TotalsComponent } from './totals/totals.component';
     HomeComponent,
     BankDepositComponent,
     CurrencyTypeComponent,
-    TotalsComponent
+    TotalsComponent,
+    OpenTotalsButtonComponent
   ],
   imports: [
     BrowserModule,

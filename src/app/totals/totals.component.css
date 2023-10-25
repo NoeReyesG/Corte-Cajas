@@ -20,6 +20,10 @@
     #printButton {
         display:none;
     }
+
+    #checkWithdrawal {
+        display:none;
+    }
 }
 
 
