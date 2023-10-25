@@ -23,7 +23,6 @@ export class CashService {
     });
 
     createCashRegister(cash: Cash): Observable<Object>{
-        console.log(cash);
         console.log(`${API_URL}/v1/cash/create`)
         return this.http.post(`${API_URL}/v1/cash/create`, cash);
     }

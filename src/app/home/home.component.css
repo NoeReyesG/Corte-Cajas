@@ -1,12 +1,12 @@
 .square {
-    height: 40%;
+    height: 45%;
     width: 50%;
     margin-top: -10rem;
     margin-left: -10rem;
 }
 
 .second-square {
-    height: 40%;
+    height: 45%;
     width: 50%;
     background-color:rgba(33,33,33, 0.95)
 }

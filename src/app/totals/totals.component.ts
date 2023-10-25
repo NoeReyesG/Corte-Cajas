@@ -24,7 +24,6 @@ currencies = [
   {name: 'credit_notes', displayName: 'Notas de Crédito', color:'bg-purple-500' },
 ];
   ngOnInit(): void {
-    console.log(this.data.totales.value);
   }
 
   printTotals():void{

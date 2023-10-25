@@ -247,6 +247,9 @@ export class EfectivoComponent implements OnInit{
     });
     this.tellerCashCalculated = true;
     this.alert = false;
+
+    //Save final cash in totals 
+    this.cashService.totals.value.cash = this.finalCashTotal;
   }
 
   /**
@@ -295,7 +298,6 @@ export class EfectivoComponent implements OnInit{
   }
 
   openTotals():void {
-    console.log(this.cashService.totals);
     this.matDialog.open(
       TotalsComponent, 
       {

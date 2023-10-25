@@ -1,0 +1,25 @@
+@media print {
+
+    @page{
+        size: portrait;
+        color:black;
+    }
+    body {
+        color:black;
+    }
+    section table tr td{
+        
+        font-size: bold;
+        color:black;
+    }
+
+    #header{
+        display:none;
+    }
+
+    #printButton {
+        display:none;
+    }
+}
+
+
