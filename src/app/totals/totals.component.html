@@ -1,7 +1,7 @@
-<section class="bg-gray-500 p-8 border-4 border-gray-400 rounded-xl">
+ <section class="bg-gray-500 p-8 border-4 border-gray-400 rounded-xl" id="totalsModal">
     <div id="header" class="flex mb-3">
         <h1 class="grow text-center font-semibold text-lg text-gray-50 p-2">Totales</h1>
-        <button class="hover:bg-gray-400 rounded-full px-2.5" (click)="closeDialog()"><mat-icon class="hover:cursor-pointer pt-1 text-white">close</mat-icon></button> 
+        <button class="hover:bg-slate-500 rounded-full px-2.5" (click)="closeDialog()"><mat-icon class="hover:cursor-pointer pt-1 text-white">close</mat-icon></button> 
     </div>
     <div id="checkWithdrawal">
         <mat-checkbox color="primary" (change)="finalMoneyWithdrawn($event);">¿Retiraste tu pico?</mat-checkbox>

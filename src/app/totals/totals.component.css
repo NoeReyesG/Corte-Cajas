@@ -1,18 +1,34 @@
 @media print {
 
     @page{
-        size: portrait;
+        size: portrait A5;
         color:black;
+        margin-top: 0;    
     }
-    body {
-        color:black;
+
+    @page:left{
+        margin-left: 0;
     }
+    @page:right{
+        margin-right: 0;
+    }
+    section{
+        visibility: hidden;
+        margin:0;
+        padding:0;
+    }
+
+    section table {
+         visibility: visible;
+    }
+
     section table tr td{
         
         font-size: bold;
         color:black;
+        margin:0;
     }
-
+    
     #header{
         display:none;
     }

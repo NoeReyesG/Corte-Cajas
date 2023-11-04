@@ -45,7 +45,7 @@
 
 <form [formGroup]="cardReceipts" >
     <ng-container formArrayName="receiptsArray"> 
-        <table *ngIf="receiptsArray.length > 0" class="w-full table-auto text-center divide-y divide-purple-400">
+        <table *ngIf="receiptsArray.length > 0" class="w-full table-auto text-center divide-y divide-gray-400">
             <thead class="bg-gray-50">
                 <tr>
                     <th class="md:px-6 px-1 py-1.5 text-xs text-gray-500">
@@ -63,10 +63,10 @@
                 *ngFor="let input of receiptsArray.controls.slice().reverse(); index as i" [class]="colors[color].table"
                 [formGroupName]="receiptsArray.length-(i+1)">
                     
-                    <td class="md:px-4 p-1 text-sm text-white">
+                    <td class="md:px-4 p-0.5 text-sm text-white">
                         <mat-label>{{i+1}}</mat-label>
                     </td>
-                    <td class="md:px-4 p-1 text-sm text-gray-700">
+                    <td class="md:px-4 p-0.5 text-sm text-gray-700">
                             <input
                             class="focus:bg-pink-300 focus:text-gray-800 focus:font-semibold bg-indigo-50 outline-none border-indigo-700 rounded pl-2 w-28"  
                             type="number"

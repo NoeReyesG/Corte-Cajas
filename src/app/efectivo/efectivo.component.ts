@@ -175,6 +175,10 @@ export class EfectivoComponent implements OnInit{
    * It indicates in tellerCashForm how many billets and coins must save the teller at the end of the day  
    */
   calculateTellerCash(): void{
+    if(this.total < 2000){
+      this.notificationService.showWarning("Tu total de efectivo es menor al fondo fijo requerido. Favor de verificar.");
+      return;
+    }
     let from: number=10, subtotal: number = 0;
     for (let index = this.valoresBilletesMoneda.length - 1; index >= 0; index--) {
       const moneyValues: moneyValue = this.valoresBilletesMoneda[index];

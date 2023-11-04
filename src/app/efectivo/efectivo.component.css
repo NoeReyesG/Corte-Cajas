@@ -8,7 +8,7 @@ table input {
         margin-bottom: 0;
         size: portrait;
     }
-    section section{
+     section section{
         display: none;
     }
     #finalCashTable{
@@ -26,5 +26,8 @@ table input {
     }
     #total{
         display: block;
+        color: black;
+        background-color: white;
+        font-weight: bolder;
     }
 }

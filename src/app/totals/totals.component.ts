@@ -18,7 +18,8 @@ export class TotalsComponent implements OnInit, OnDestroy{
     public dialogRef: MatDialogRef<TotalsComponent>
   ){}
 
-  cashTotal: number;  
+  cashTotal: number; 
+  width: string = '350px'; 
   currencies = [
     {name: 'cash', displayName: 'Efectivo', color:'bg-pink-600' },
     {name: 'cards', displayName: 'Tarjetas', color:'bg-[#219ebc]' },
@@ -32,8 +33,17 @@ export class TotalsComponent implements OnInit, OnDestroy{
   }
 
   printTotals():void{
+    
+    this.width = 'auto'
+    //let modalContent = document.querySelector('#totalsModal').innerHTML;
+    //const mainPageContent = document.querySelector('#mainContent').innerHTML;
+    //document.querySelector('#mainContent').innerHTML = modalContent;
+    //console.log(mainPageContent);
+
+
     window.print();
-    this.dialogRef.close();
+
+    //this.dialogRef.close();
   }
 
   finalMoneyWithdrawn(event: MatCheckboxChange){
