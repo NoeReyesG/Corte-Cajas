@@ -24,6 +24,7 @@ import { BankDepositComponent } from './bank-deposit/bank-deposit.component';
 import { CurrencyTypeComponent } from './currency-type/currency-type.component';
 import { TotalsComponent } from './totals/totals.component';
 import { OpenTotalsButtonComponent } from './totals/open-totals-button/open-totals-button.component';
+import { NgxPrintModule } from 'ngx-print';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { OpenTotalsButtonComponent } from './totals/open-totals-button/open-tota
     MatInputModule,
     MatTooltipModule,
     MatDialogModule,
+    NgxPrintModule,
     ToastrModule.forRoot(),
   ],
   providers: [],

@@ -21,11 +21,11 @@ export class TotalsComponent implements OnInit, OnDestroy{
   cashTotal: number; 
   width: string = '350px'; 
   currencies = [
-    {name: 'cash', displayName: 'Efectivo', color:'bg-pink-600' },
-    {name: 'cards', displayName: 'Tarjetas', color:'bg-[#219ebc]' },
     {name: 'checks', displayName: 'Cheques', color:'bg-blue-800' },
-    {name: 'bank_deposits', displayName: 'Fichas de déposito', color:'bg-amber-500' },
+    {name: 'cash', displayName: 'Efectivo', color:'bg-pink-600' },
     {name: 'credit_notes', displayName: 'Notas de Crédito', color:'bg-purple-500' },
+    {name: 'bank_deposits', displayName: 'Fichas de déposito', color:'bg-amber-500' },
+    {name: 'cards', displayName: 'Tarjetas', color:'bg-[#219ebc]' },
   ];
 
   ngOnInit(): void {
