@@ -1,13 +1,11 @@
-input {
-    border:none;
-}
+
 
 .main-container{
     width: 1000px;
     height: 570 px;
     padding-right: 0px;
     border-style: solid;
-    border-color: black;
+    border-color: black;    
     margin: auto;
     margin-top: 5px;
 }
@@ -21,6 +19,9 @@ input {
     height: 100px;
 }
 
+.head input {
+    border:none;
+}
 .bank-logo {
     grid-column: 1/3;
     grid-row: 1/3;
@@ -71,13 +72,19 @@ input {
     border-color: black;
     margin: 5px;  
 }
+
+
 .body-head {
     
     width: 980px;
     height: 67px;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+}
+
+.body-head input {
+    border:none;
 }
 
 .body-head section {
@@ -108,7 +115,36 @@ input {
     border-right: none;
 }
 
-.main-body {
+
+.body-subhead{
+    width: 732px;
+    height: 40px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    border-bottom: solid;
+    border-right: solid;
+    border-color: black;
+    font-size: small;
+    padding-top: 5px;
+}
+
+.cash {
+    grid-column:1/3;
+    
+}
+.checks {
+    grid-column: 3/5;
+    margin-left: 10px;
+}
+.foreign-currency {
+    grid-column: 5/7;
+}
+
+.right-left{
+    display: flex;
+}
+/* .main-body {
     width: 980px;
     height: 400px;
     display: grid;
@@ -121,13 +157,39 @@ input {
     font-size: small;
     padding-top: 2px;
 }
-.cash {
-    grid-column:1/3;
-}
-.checks {
-    grid-column: 3/5;
-}
-.foreign-currency {
-    grid-column: 5/7;
+
+ */
+
+.head-table {
+    width: 732px;
+    height: 29px;
+    border-bottom: solid;
     border-right: solid;
+    border-color: black;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);  
+}
+.cell {
+    height: 29px;
+    border-right: solid;
+    border-color: black;
+    padding-left: 5px;
+}
+
+.checksForm {   
+    width: 732px;
+    height: 320px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    border-bottom: solid;
+    border-right: solid;
+    border-color: black;
+    
+
+}
+
+.checksForm input {
+    width:114px;
+    height: 26px;
 }

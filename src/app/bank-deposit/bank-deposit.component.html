@@ -38,27 +38,100 @@
                 <div style="font-size: large;"><b>{{currentDate | date}}</b></div>
             </section>    
         </section>
+        <section class="right-left">
+            <section>
+                <div class="body-subhead">    
+                    <div class="cash">
+                        <span>A) </span>
+                        <input type="checkbox" id="cashInput" checked>
+                        <label for="cashInput">EFECTIVO Y CHEQUES BANCOMER</label>
+                    </div>
+                    <div class="checks">
+                        <span>B) </span>
+                        <input type="checkbox" id="checksInput">
+                        <label for="checksInput">CHEQUES DE OTROS BANCOS</label>
+                    </div>
+                    <div class="foreign-currency">
+                        <span>C) </span>
+                        <input type="checkbox" id="foreignInput">
+                        <label for="foreignInput">REMESAS SOBRE EL EXTRANJERO</label>
+                    </div>
+                </div>
+            <form [formGroup]="bankDepositForm">
 
-        <section class="main-body">    
-                <div class="cash">
-                    <span>A) </span>
-                    <input type="checkbox" id="cashInput" checked>
-                    <label for="cashInput">EFECTIVO Y CHEQUES BANCOMER</label>
-                </div>
-                <div class="checks">
-                    <span>B) </span>
-                    <input type="checkbox" id="checksInput">
-                    <label for="checksInput">CHEQUES DE OTROS BANCOS</label>
-                </div>
-                <div class="foreign-currency">
-                    <span>C) </span>
-                    <input type="checkbox" id="foreignInput">
-                    <label for="foreignInput">REMESAS SOBRE EL EXTRANJERO</label>
-                </div>
+                <ng-container formArrayName="checks">
+                    <div class="head-table">
+                        <div class="cell">
+                            Cheque
+                        </div>
+                        <div class="cell">
+                            Importe
+                        </div>
+                        <div class="cell">
+                            Cheque
+                        </div>
+                        <div class="cell">
+                            Importe
+                        </div>
+                        <div class="cell">
+                            Cheque
+                        </div>
+                        <div class="cell">
+                            Importe
+                        </div>
+                    </div>
+                    <div class="checksForm">
+                        
+                        <ng-container *ngFor="let info of checks.controls; let i = index;"  >
+                    
+                            <div [formGroupName]="i" style="display: flex"> 
+                                <input type="number" formControlName="number" placeholder="number" class="">
+                            
+                                <input type="number" formControlName="value" placeholder="value">
+                            </div>
+                        </ng-container>
+                    
+                        <ng-container *ngFor="let info of checks.controls; let i = index;"  >
+                    
+                            <div [formGroupName]="i" style="display: flex"> 
+                                <input type="number" formControlName="number" placeholder="number">
+                            
+                                <input type="number" formControlName="value" placeholder="value">
+                            </div>
+                        </ng-container>
+                    
+                        <ng-container *ngFor="let info of checks.controls; let i = index;"  >
+                    
+                            <div [formGroupName]="i" style="display: flex"> 
+                                <input type="number" formControlName="number" placeholder="number">
+                            
+                                <input type="number" formControlName="value" placeholder="value">
+                            </div>
+                        </ng-container>
+                        
+
+                    </div>
+                    
+                    <!-- <ng-container *ngFor="let info of checks.controls; let i = index;"  >
+                        
+                        <div [formGroupName]="i" class="checksForm"> 
+                            <input type="number" formControlName="number" placeholder="number" class="cell">
+                        
+                            <input type="number" formControlName="value" placeholder="value" class="cell">
+                        </div>
+
+                    </ng-container> -->
+                        
+                </ng-container>
+            
+            </form>
+            </section>
         </section>
 
-    </section>
 
-    
+
+        
+    </section>
+   
 
 </section>
