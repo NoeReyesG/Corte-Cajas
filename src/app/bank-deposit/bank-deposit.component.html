@@ -18,7 +18,7 @@
         </div>
         <div class="coin">MONEDA</div>
         <div class="national">
-            <mat-checkbox>Nacional</mat-checkbox>
+            <mat-checkbox checked="true">Nacional</mat-checkbox>
         </div>
         <div class="usd">
             <mat-checkbox>Dolares</mat-checkbox>
@@ -76,40 +76,18 @@
                         <div class="cell">
                             Cheque
                         </div>
-                        <div style="margin-left:3px">
+                        <div class="cell">
                             Importe
                         </div>
                     </div>
                     <div class="checksForm">
-                        <ng-container formArrayName="checks1">
-                        <ng-container *ngFor="let info of checks1.controls; let i = index;"  >
+                        <ng-container formArrayName="checks">
+                        <ng-container *ngFor="let info of checks.controls; let i = index;"  >
                     
                             <div [formGroupName]="i" style="display: flex"> 
                                 <input type="number" formControlName="number" class="" (keyup)="suma()">
                             
                                 <input type="number" formControlName="value"  (keyup)="suma()">
-                            </div>
-                        </ng-container>
-                        </ng-container>
-                    
-                        <ng-container formArrayName="checks2">
-                        <ng-container *ngFor="let info of checks2.controls; let i = index;"  >
-                    
-                            <div [formGroupName]="i" style="display: flex"> 
-                                <input type="number" formControlName="number" (keyup)="suma()">
-                            
-                                <input type="number" formControlName="value" (keyup)="suma()">
-                            </div>
-                        </ng-container>
-                        </ng-container>
-                    
-                        <ng-container formArrayName="checks3">
-                        <ng-container *ngFor="let info of checks3.controls; let i = index;"  >
-                    
-                            <div [formGroupName]="i" style="display: flex"> 
-                                <input type="number" formControlName="number" placeholder="number" (keyup)="suma()">
-                            
-                                <input type="number" formControlName="value" placeholder="value" (keyup)="suma()">
                             </div>
                         </ng-container>
                         </ng-container>
@@ -143,13 +121,12 @@
                     <span>{{finalCashTotal+sumChecksTotal | currency}}</span>
                 </div>
 
-
-
             </section>
-
             
         </section>    
     </section>
 </section>
 
 </form>
+
+<button mat-raised-button color="primary" (click)="print()"> Imprimir</button>
