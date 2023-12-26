@@ -230,7 +230,7 @@ export class EfectivoComponent implements OnInit{
       this.calculateFinalCash();
       let values:[] = this.cashForm.getRawValue();
       let otherValues = JSON.stringify(values);
-      sessionStorage.setItem("cashForm",otherValues)
+      sessionStorage.setItem("cashForm", otherValues)
       !this.fromSessionStorage? this.notificationService.showSuccess("Se realizó el cálculo del fondo fijo correctamente"): this.fromSessionStorage = false;
     }
   }
@@ -254,6 +254,8 @@ export class EfectivoComponent implements OnInit{
 
     //Save final cash in totals 
     this.cashService.totals.value.cash = this.finalCashTotal;
+    let cashTotalforBankDeposit: string = String(this.finalCashTotal);
+    sessionStorage.setItem("finalCashTotal", cashTotalforBankDeposit);
   }
 
   /**

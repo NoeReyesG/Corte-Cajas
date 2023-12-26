@@ -118,7 +118,7 @@
 
 .body-subhead{
     width: 732px;
-    height: 40px;
+    height: 26px;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(1, 1fr);
@@ -144,21 +144,6 @@
 .right-left{
     display: flex;
 }
-/* .main-body {
-    width: 980px;
-    height: 400px;
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(12, 1fr);    
-}
-.main-body > div {
-    border-bottom: solid;
-    border-color: black;
-    font-size: small;
-    padding-top: 2px;
-}
-
- */
 
 .head-table {
     width: 732px;
@@ -172,6 +157,7 @@
 .cell {
     height: 29px;
     border-right: solid;
+
     border-color: black;
     padding-left: 5px;
 }
@@ -191,5 +177,50 @@
 
 .checksForm input {
     width:114px;
-    height: 26px;
+    height: 27.5px;
+}
+
+.totals{
+    width:245px;
+    height:400px;
+    display:grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(12, 1fr);
+}
+
+.totals-tag{
+    font-size: small;
+    text-align: center;
+}
+.total-number-checks{
+    font-size: larger;
+    font-weight: bold;
+    text-align: center;
+    border-bottom-style: solid;
+}
+
+.cash-total{
+    grid-row:4/6;
+    padding-top: 15px;
+    border-bottom-style: solid; 
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold; 
+}
+.checks-total{
+    grid-row:7/9;
+    padding-top: 15px;
+    border-bottom-style: solid; 
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold; 
+}
+
+.final-total{
+    grid-row:10/13;
+    padding-top: 15px;
+ 
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold; 
 }
