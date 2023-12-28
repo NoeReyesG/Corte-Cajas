@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip'; 
 import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSelectModule} from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input'
 import { MatTabsModule } from '@angular/material/tabs';
@@ -25,6 +26,8 @@ import { CurrencyTypeComponent } from './currency-type/currency-type.component';
 import { TotalsComponent } from './totals/totals.component';
 import { OpenTotalsButtonComponent } from './totals/open-totals-button/open-totals-button.component';
 import { NgxPrintModule } from 'ngx-print';
+import { FooterComponent } from './footer/footer.component';
+import { InitialConfigurationComponent } from './initial-configuration/initial-configuration.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,9 @@ import { NgxPrintModule } from 'ngx-print';
     BankDepositComponent,
     CurrencyTypeComponent,
     TotalsComponent,
-    OpenTotalsButtonComponent
+    OpenTotalsButtonComponent,
+    FooterComponent,
+    InitialConfigurationComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +61,7 @@ import { NgxPrintModule } from 'ngx-print';
     MatInputModule,
     MatTooltipModule,
     MatDialogModule,
+    MatSelectModule,
     NgxPrintModule,
     ToastrModule.forRoot(),
   ],

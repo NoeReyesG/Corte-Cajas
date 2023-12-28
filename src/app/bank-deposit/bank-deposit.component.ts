@@ -17,11 +17,13 @@ export class BankDepositComponent implements OnInit{
   currentDate: Date = new Date();
   numberChecks: number = 0;
   finalCashTotal: number = 0;
-  sumChecksTotal: number = 0; 
+  sumChecksTotal: number = 0;
+  display: string = 'none'; 
 
   bankDepositForm: FormGroup = this.fb.group({
     cashierName: this.fb.control('Noé Reyes'),
     tellerWindowNumber: this.fb.control(1),
+    reference: this.fb.control(''),
     checks : this.fb.array([]),
     
   })
@@ -33,15 +35,23 @@ export class BankDepositComponent implements OnInit{
   ngOnInit(): void {
     //let control = this.bankDepositForm.get('checks');
 
+    if (sessionStorage.getItem('configValues')){
+      let configValues = sessionStorage.getItem('configValues');
+      let configValuesJson = JSON.parse(configValues);
+    
+      this.finalCashTotal =  this.finalCashTotal + (configValuesJson.withdrawals * configValuesJson.withdrawalAmount)
+      this.bankDepositForm.get('cashierName').setValue(configValuesJson.name);
+      this.bankDepositForm.get('reference').setValue(configValuesJson.bankDepositReference);
+
+    }
     if (sessionStorage.getItem('finalCashTotal')){
-      this.finalCashTotal = Number(sessionStorage.getItem('finalCashTotal')); 
+      this.finalCashTotal = this.finalCashTotal + Number(sessionStorage.getItem('finalCashTotal')); 
     }
     for (let i: number = 0; i <= 29; i++){
       this.checks.push(this.fb.group({
         number: [undefined],
         value: [undefined],
-      }));
-      
+      }));  
     }
   }
 
@@ -59,7 +69,16 @@ export class BankDepositComponent implements OnInit{
   }
 
   print():void {
-    window.print();
+    this.display = 'block';
+    setTimeout(()=>{
+      window.print();  
+    }, 200)
+    
+    setTimeout(()=>{
+      this.display ="none"  
+    }, 300)
+    
+    
   }
 
 }

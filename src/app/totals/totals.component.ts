@@ -38,7 +38,6 @@ export class TotalsComponent implements OnInit, OnDestroy{
     //let modalContent = document.querySelector('#totalsModal').innerHTML;
     //const mainPageContent = document.querySelector('#mainContent').innerHTML;
     //document.querySelector('#mainContent').innerHTML = modalContent;
-    //console.log(mainPageContent);
 
 
     window.print();

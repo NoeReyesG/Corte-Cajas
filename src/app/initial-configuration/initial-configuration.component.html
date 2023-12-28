@@ -1,0 +1,26 @@
+<form [formGroup]="configForm" class="flex flex-col p-4 my-5 mx-20 justify-center" >
+    <h1 class="m-2 pb-3 text-center text-zinc-100 text-xl">Configuración Inicial</h1>
+<mat-form-field>
+    <mat-label>CAC</mat-label>
+    <mat-select formControlName="branch" (selectionChange)="selectBranch($event.value)">
+        <mat-option *ngFor="let branch of branchs" [value]="branch.cacId">{{branch.cacName}}</mat-option>
+
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label>Cajero</mat-label>
+    <mat-select formControlName="cashier">
+        <mat-option *ngFor="let cashier of cashiers" [value]="cashier.idEmployee">{{cashier.name}}</mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label> Numero de retiros</mat-label>
+    <input matInput formControlName="withdrawals" appOnlyDigits placeholder="ingresa la cantidad de retiros">
+</mat-form-field>
+<div class="flex justify-end">
+    <button mat-raised-button color="primary"  (click)="saveConfig()">Listo</button>
+</div>
+
+</form>

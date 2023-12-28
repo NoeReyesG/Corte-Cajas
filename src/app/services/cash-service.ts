@@ -22,6 +22,13 @@ export class CashService {
         credit_notes: 0
     });
 
+    // public CACConfiguration = new BehaviorSubject({
+    //   withDrawals: 0,
+    //   cashierName: '',
+    //   bankDepositReference: '',
+    //   amountPerWithdrawal: 0,
+    // })
+
     createCashRegister(cash: Cash): Observable<Object>{
         console.log(`${API_URL}/v1/cash/create`)
         return this.http.post(`${API_URL}/v1/cash/create`, cash);
@@ -43,5 +50,9 @@ export class CashService {
               sessionStorage.setItem('creditNotesTotal', total);
               break;
           }       
+    }
+
+    setConfigurationValues(): void {
+
     }
 }

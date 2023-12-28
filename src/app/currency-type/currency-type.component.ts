@@ -34,7 +34,6 @@ ngOnInit(){
 saveCurrency(currencyInfo: any, type:CurrencyType){
   switch(type){
     case 'cards':
-      console.log(currencyInfo.values);
       sessionStorage.setItem('cardValues', currencyInfo.values);
       break;
     case 'checks':
