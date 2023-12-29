@@ -13,12 +13,13 @@ export class BankDepositComponent implements OnInit{
   constructor(
     private fb: FormBuilder,
   ){}
-
-  currentDate: Date = new Date();
+  
   numberChecks: number = 0;
+  currentDate: string; 
   finalCashTotal: number = 0;
   sumChecksTotal: number = 0;
-  display: string = 'none'; 
+  display: string = 'none';
+  displayPrintButtons = 'flex'; 
 
   bankDepositForm: FormGroup = this.fb.group({
     cashierName: this.fb.control('Noé Reyes'),
@@ -34,7 +35,10 @@ export class BankDepositComponent implements OnInit{
 
   ngOnInit(): void {
     //let control = this.bankDepositForm.get('checks');
-
+    this.currentDate = new Intl.DateTimeFormat("es-ES",{
+      dateStyle: "long"
+    }).format(new Date());
+    console.log(this.currentDate);
     if (sessionStorage.getItem('configValues')){
       let configValues = sessionStorage.getItem('configValues');
       let configValuesJson = JSON.parse(configValues);
@@ -70,15 +74,29 @@ export class BankDepositComponent implements OnInit{
 
   print():void {
     this.display = 'block';
+    this.displayPrintButtons = 'none';
     setTimeout(()=>{
       window.print();  
     }, 200)
     
     setTimeout(()=>{
-      this.display ="none"  
-    }, 300)
-    
-    
+      this.display ="none"
+      this.displayPrintButtons="flex";  
+    }, 300)       
+  }
+
+  resetForm(){
+    //this.bankDepositForm.reset();
+    this.numberChecks = 0;
+    this.sumChecksTotal = 0;
+    this.finalCashTotal = 0;
+    for (let i: number = 0; i <= 29; i++){
+      
+      if (this.checks.at(i).value.number != null || this.checks.at(i).value.value != null) {
+        this.checks.at(i).get('number').setValue(null);
+        this.checks.at(i).get('value').setValue(null);
+      }
+    }    
   }
 
 }
