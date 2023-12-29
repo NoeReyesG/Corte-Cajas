@@ -28,6 +28,7 @@ import { OpenTotalsButtonComponent } from './totals/open-totals-button/open-tota
 import { NgxPrintModule } from 'ngx-print';
 import { FooterComponent } from './footer/footer.component';
 import { InitialConfigurationComponent } from './initial-configuration/initial-configuration.component';
+import { ShortcutsComponent } from './shortcuts/shortcuts.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { InitialConfigurationComponent } from './initial-configuration/initial-c
     TotalsComponent,
     OpenTotalsButtonComponent,
     FooterComponent,
-    InitialConfigurationComponent
+    InitialConfigurationComponent,
+    ShortcutsComponent
   ],
   imports: [
     BrowserModule,

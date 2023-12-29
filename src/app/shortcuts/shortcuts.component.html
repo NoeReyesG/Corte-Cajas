@@ -1,0 +1,50 @@
+<section class="grid place-items-center bg-slate-400 my-10 mx-64 rounded-md p-5">
+
+    <div id="title" class="m-5  rounded-lg">
+        <h1 class="text-center font-extrabold text-lg">Sitios de Cajas</h1>
+    </div>
+    <section class="flex">
+
+        <div class="px-10">
+            <h3 class="font-bold text-lg m-2 text-center">Acceso a sitios</h3>
+            <div class="flex">
+                <ul class="px-2">
+                    <li class="hover:bg-[#115f9a]"><a href="http://intranet.telcel.com:8020/siatemaalterno/inicio.do" target="_blank">Sistema alterno</a></li>
+                    <li class="hover:bg-[#115f9a]"><a href="http://intranet2.telcel.com/" target="_blank">Intranet Corporativa</a></li>
+                    <li class="hover:bg-[#115f9a]"><a href="http://10.188.42.82:8080/Monitor/Login.jsp" target="_blank">Gerencia de nominas</a></li>
+                </ul>
+                <ul class="px-2">
+                    <li class="hover:bg-[#115f9a]"><a href="file://mxginoficor01/R5_install$/Cajas/Sitio_cajas/Sitio_de_cajas.html" target="_blank">Sitio de Cajas</a></li>
+                    <li class="hover:bg-[#115f9a]"><a href="http://intranet.telcel.com:8020/drh/incidencias/" target="_blank">Incidencias</a></li>
+                    <li class="hover:bg-[#115f9a]"><a href="http://sap.telcel.com/ventaEmpleados/" target="_blank">Venta a Empleados</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="px-10">
+            <h3 class="font-bold text-lg m-2">Archivos de excel</h3>
+            <ul class="px-2">
+                <li class="hover:bg-[#115f9a]">
+                    <a href="https://docs.google.com/spreadsheets/d/1sgA79SJdrAaqniIbpRkaeDlOC_KOuiFu/edit?usp=share_link&ouid=116118776050479064671&rtpof=true&sd=true" 
+                    target="_blank">Tiempo extra</a>
+                </li>
+                <li class="hover:bg-[#115f9a]">
+                    <a href="https://docs.google.com/spreadsheets/d/1BiGkpwwj7s0z-hP4goiM1af8cPWxRQz6/edit?usp=share_link&ouid=116118776050479064671&rtpof=true&sd=true" 
+                    target="_blank">Envío de cortes</a>
+                </li>      
+            </ul>
+        </div>
+    </section>
+
+</section>
+
+
+<section class="flex justify-center">
+    <mat-form-field>
+        <mat-label>Datos para transferencia</mat-label>
+        <textarea matInput disabled="true" rows="8">{{transferData}}</textarea>
+    </mat-form-field>
+</section>
+
+<div class="mt-36">
+<app-footer></app-footer>
+</div>
