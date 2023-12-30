@@ -25,6 +25,7 @@ export class BankDepositComponent implements OnInit{
     cashierName: this.fb.control('Noé Reyes'),
     tellerWindowNumber: this.fb.control(1),
     reference: this.fb.control(''),
+    finalCashTotalControl: this.fb.control(0),
     checks : this.fb.array([]),
     
   })
@@ -57,6 +58,8 @@ export class BankDepositComponent implements OnInit{
         value: [undefined],
       }));  
     }
+
+    this.bankDepositForm.get('finalCashTotalControl').setValue(this.finalCashTotal);
   }
 
   suma(): void{
@@ -85,11 +88,16 @@ export class BankDepositComponent implements OnInit{
     }, 300)       
   }
 
+  recalculateTotal():void{
+    
+  }
+
   resetForm(){
     //this.bankDepositForm.reset();
     this.numberChecks = 0;
     this.sumChecksTotal = 0;
     this.finalCashTotal = 0;
+    this.bankDepositForm.get('finalCashTotalControl').setValue(0);
     for (let i: number = 0; i <= 29; i++){
       
       if (this.checks.at(i).value.number != null || this.checks.at(i).value.value != null) {

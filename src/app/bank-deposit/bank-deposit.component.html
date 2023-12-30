@@ -106,7 +106,7 @@
                     IMPORTE EN EFECTIVO
                 </div>
                 <div class="cash-total">
-                    <span>{{finalCashTotal | currency}}</span>
+                    <input currencyMask (blur)= "recalculateTotal()" formControlName="finalCashTotalControl" [options]="{ prefix: '$ ', thousands: ',', decimal: '.', align:'center'}" >
                 </div>
                 <div class="totals-tag">
                     IMPORTE EN CHEQUES
@@ -118,7 +118,7 @@
                     IMPORTE TOTAL DEL DEPOSITO
                 </div>
                 <div class="final-total">
-                    <span>{{finalCashTotal+sumChecksTotal | currency}}</span>
+                    <span>{{this.bankDepositForm.get('finalCashTotalControl').value + sumChecksTotal | currency}}</span>
                 </div>
 
             </section>
@@ -244,7 +244,7 @@
                         IMPORTE EN EFECTIVO
                     </div>
                     <div class="cash-total">
-                        <span>{{finalCashTotal | currency}}</span>
+                        <input currencyMask formControlName="finalCashTotalControl" [options]="{ prefix: '$ ', thousands: ',', decimal: '.', align:'center'}" >
                     </div>
                     <div class="totals-tag">
                         IMPORTE EN CHEQUES

@@ -29,6 +29,7 @@ import { NgxPrintModule } from 'ngx-print';
 import { FooterComponent } from './footer/footer.component';
 import { InitialConfigurationComponent } from './initial-configuration/initial-configuration.component';
 import { ShortcutsComponent } from './shortcuts/shortcuts.component';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { ShortcutsComponent } from './shortcuts/shortcuts.component';
     MatDialogModule,
     MatSelectModule,
     NgxPrintModule,
+    CurrencyMaskModule,
     ToastrModule.forRoot(),
   ],
   providers: [],

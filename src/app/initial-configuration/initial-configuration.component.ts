@@ -24,7 +24,8 @@ export class InitialConfigurationComponent {
     {idEmployee: 43115,  name: 'Noé Macario Reyes González'},
     {idEmployee: 27478,  name: 'María Isabel Morales Jasso'},
     {idEmployee: 42099,  name: 'Sonia Guadalupe Mendoza Cortes'},
-    {idEmployee: 56838, name: 'Gloria Mauricio Cortes'},
+    {idEmployee: 56838, name: 'Gloria Angelica Mauricio Magaña'},
+    {idEmployee: 61725, name: 'Martha Patricia Zamora Ramirez'},
   ]
   
 
