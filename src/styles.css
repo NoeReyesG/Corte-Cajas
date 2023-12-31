@@ -1,8 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 /*@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';*/
 
+
+@font-face {
+    font-family: 'Book Old';
+    src: url('assets/fonts/BOOKOS.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+    
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @import "~@angular/material/prebuilt-themes/pink-bluegrey.css"
+
+
 

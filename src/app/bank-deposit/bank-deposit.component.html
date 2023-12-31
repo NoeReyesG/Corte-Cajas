@@ -5,8 +5,8 @@
         <div class="bank-logo">
             <img src="./assets/logo-bbva.png" alt="logo bancario bbva">
         </div>
-        <div class="fill-info">Llenar una ficha por cada tipo de deposito(A, B ó C)</div>
-        <div id="cashier-name"><input style="text-align: right;" type="text" formControlName="cashierName" value="Noe Reyes"></div>
+        <div class="fill-info">LLENAR UNA FICHA POR CADA TIPO DE DEPÓSITO (A, B ó C)</div>
+        <div id="cashier-name" class="cashier-name"><input type="text" formControlName="cashierName" value="Noe Reyes"></div>
         <div class="title">
             <b>DEPOSITO EMPRESARIAL</b>
         </div>
@@ -28,16 +28,16 @@
     <section class="full-body">
         <section class="body-head">
             <section class="agreement-number">
-                <div>Numero de convenio</div>
-                <div style="font-size: x-large;"><b>76456</b></div>
+                <div style="font-size: small">NUMERO DE CONVENIO</div>
+                <div style="font-size: large;"><b>76456</b></div>
             </section>
             <section class="reference">
-                <div>Referencia</div>
-                <div><input type="text" formControlName="reference"></div>
+                <div style="font-size: small;">REFERENCIA</div>
+                <div><input style="padding-top: 5px;" type="text" formControlName="reference"></div>
             </section>
             <section class="date">
-                <div>FECHA (DD/MM/AA)</div>
-                <div style="padding-top: 10px;"><b>{{currentDate}}</b></div>
+                <div style="font-size: small;">FECHA (DD/MM/AA)</div>
+                <div style="padding-top: 5px;"><b>{{currentDate}}</b></div>
             </section>    
         </section>
         <section class="right-left">
@@ -62,22 +62,22 @@
            
                     <div class="head-table">
                         <div class="cell">
-                            Cheque
+                            NUMERO DE CHEQUE
                         </div>
                         <div class="cell">
-                            Importe
+                            IMPORTE
                         </div>
                         <div class="cell">
-                            Cheque
+                            NUMERO DE CHEQUE
                         </div>
                         <div class="cell">
-                            Importe
+                            IMPORTE
                         </div>
                         <div class="cell">
-                            Cheque
+                            NUMERO DE CHEQUE
                         </div>
                         <div class="cell">
-                            Importe
+                            IMPORTE
                         </div>
                     </div>
                     <div class="checksForm">
@@ -106,7 +106,7 @@
                     IMPORTE EN EFECTIVO
                 </div>
                 <div class="cash-total">
-                    <input currencyMask (blur)= "recalculateTotal()" formControlName="finalCashTotalControl" [options]="{ prefix: '$ ', thousands: ',', decimal: '.', align:'center'}" >
+                    <input currencyMask (blur)= "recalculateTotal()" formControlName="finalCashTotalControl" [options]="{ prefix: '$ ', thousands: ',', decimal: '.', align:'center', }" >
                 </div>
                 <div class="totals-tag">
                     IMPORTE EN CHEQUES
@@ -136,6 +136,10 @@
 </div>
 </section>
 
+<br> 
+<hr [ngStyle]="{'display':display}">
+<br>
+
 <form [formGroup]="bankDepositForm" id="form2" [ngStyle]="{'display':display}">
 
     <section class=" main-container m-2 border border-green-500 h-30">
@@ -143,8 +147,8 @@
             <div class="bank-logo">
                 <img src="./assets/logo-bbva.png" alt="logo bancario bbva">
             </div>
-            <div class="fill-info">Llenar una ficha por cada tipo de deposito(A, B ó C)</div>
-            <div id="cashier-name"><input style="text-align: right;" type="text" formControlName="cashierName" value="Noe Reyes"></div>
+            <div class="fill-info">LLENAR UNA FICHA POR CADA TIPO DE DEPÓSITO (A, B ó C)</div>
+            <div id="cashier-name" class="cashier-name"><input type="text" formControlName="cashierName" value="Noe Reyes"></div>
             <div class="title">
                 <b>DEPOSITO EMPRESARIAL</b>
             </div>
@@ -166,16 +170,16 @@
         <section class="full-body">
             <section class="body-head">
                 <section class="agreement-number">
-                    <div>Numero de convenio</div>
-                    <div style="font-size: x-large;"><b>76456</b></div>
+                    <div style="font-size: small">NUMERO DE CONVENIO</div>
+                    <div style="font-size: large;"><b>76456</b></div>
                 </section>
                 <section class="reference">
-                    <div>Referencia</div>
-                    <div><input type="text" formControlName="reference"></div>
+                    <div style="font-size: small;">REFERENCIA</div>
+                    <div><input style="padding-top: 5px;" type="text" formControlName="reference"></div>
                 </section>
                 <section class="date">
-                    <div>FECHA (DD/MM/AA)</div>
-                    <div style="padding-top: 10px;"><b>{{currentDate}}</b></div>
+                    <div style="font-size: small;">FECHA (DD/MM/AA)</div>
+                    <div style="padding-top: 5px;"><b>{{currentDate}}</b></div>
                 </section>    
             </section>
             <section class="right-left">
@@ -200,32 +204,32 @@
                
                         <div class="head-table">
                             <div class="cell">
-                                Cheque
+                                NUMERO DE CHEQUE
                             </div>
                             <div class="cell">
-                                Importe
+                                IMPORTE
                             </div>
                             <div class="cell">
-                                Cheque
+                                NUMERO DE CHEQUE
                             </div>
                             <div class="cell">
-                                Importe
+                                IMPORTE
                             </div>
                             <div class="cell">
-                                Cheque
+                                NUMERO DE CHEQUE
                             </div>
                             <div class="cell">
-                                Importe
+                                IMPORTE
                             </div>
                         </div>
                         <div class="checksForm">
                             <ng-container formArrayName="checks">
                             <ng-container *ngFor="let info of checks.controls; let i = index;"  >
                         
-                                <div [formGroupName]="i" style="display: flex;"> 
+                                <div [formGroupName]="i" style="display: flex"> 
                                     <input type="number" formControlName="number" class="check-cell" (keyup)="suma()">
                                 
-                                    <input type="number" formControlName="value" class="check-cell" (keyup)="suma()">
+                                    <input type="number" formControlName="value"  class="check-cell" (keyup)="suma()">
                                 </div>
                             </ng-container>
                             </ng-container>
@@ -244,7 +248,7 @@
                         IMPORTE EN EFECTIVO
                     </div>
                     <div class="cash-total">
-                        <input currencyMask formControlName="finalCashTotalControl" [options]="{ prefix: '$ ', thousands: ',', decimal: '.', align:'center'}" >
+                        <input currencyMask (blur)= "recalculateTotal()" formControlName="finalCashTotalControl" [options]="{ prefix: '$ ', thousands: ',', decimal: '.', align:'center', }" >
                     </div>
                     <div class="totals-tag">
                         IMPORTE EN CHEQUES
@@ -256,13 +260,14 @@
                         IMPORTE TOTAL DEL DEPOSITO
                     </div>
                     <div class="final-total">
-                        <span>{{finalCashTotal+sumChecksTotal | currency}}</span>
+                        <span>{{this.bankDepositForm.get('finalCashTotalControl').value + sumChecksTotal | currency}}</span>
                     </div>
     
                 </section>
                 
             </section>    
         </section>
-    </section>
-    </form>
-
+    </section>    
+    
+</form>
+    
