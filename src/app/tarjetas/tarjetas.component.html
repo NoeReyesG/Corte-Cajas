@@ -9,8 +9,9 @@
         min="0"
         type="number"
         matInput
-        (keyup.enter)="addInput($event)" >
-        <mat-icon matSuffix class="text-white" (click)="addInput($event)">control_point</mat-icon>
+        [formControl]="currencyInputControl"
+        (keyup.enter)="addInput()" >
+        <mat-icon matSuffix class="text-white" (click)="addInput()">control_point</mat-icon>
         <mat-hint>Enter para agregar</mat-hint>
         
     </mat-form-field>

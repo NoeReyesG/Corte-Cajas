@@ -39,7 +39,7 @@ export class BankDepositComponent implements OnInit{
     this.currentDate = new Intl.DateTimeFormat("es-ES",{
       dateStyle: "long"
     }).format(new Date());
-    console.log(this.currentDate);
+    
     if (sessionStorage.getItem('configValues')){
       let configValues = sessionStorage.getItem('configValues');
       let configValuesJson = JSON.parse(configValues);

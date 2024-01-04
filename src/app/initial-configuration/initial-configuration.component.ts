@@ -1,6 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
 import { NotificationService } from '../services/notification-service';
 
 @Component({
@@ -8,7 +8,7 @@ import { NotificationService } from '../services/notification-service';
   templateUrl: './initial-configuration.component.html',
   styleUrls: ['./initial-configuration.component.css']
 })
-export class InitialConfigurationComponent {
+export class InitialConfigurationComponent implements OnInit{
   constructor(
     private _fb: FormBuilder,
     private notificationService: NotificationService,
@@ -34,6 +34,18 @@ export class InitialConfigurationComponent {
     cashier: ['', Validators.required],
     withdrawals: [0],
   })
+
+  ngOnInit():void {
+    if (sessionStorage.getItem('configValues')){
+      let configValues = sessionStorage.getItem('configValues');
+      let configValuesJson = JSON.parse(configValues);
+  
+      this.configForm.get('cashier').setValue(configValuesJson.idEmployee);
+      this.configForm.get('branch').setValue(configValuesJson.cacId);
+      this.configForm.get('withdrawals').setValue(configValuesJson.withdrawals);
+    }
+
+  }
 
   saveConfig():void{
     if (this.configForm.valid){

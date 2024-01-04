@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CurrencyFormElement, CurrencyType } from '../models/cash';
 import { CashService } from '../services/cash-service';
 
@@ -40,6 +40,7 @@ export class TarjetasComponent implements OnInit{
 
   
   currencyTotal: number = 0;
+  currencyInputControl: FormControl = new FormControl(undefined);
   cardReceipts: FormGroup = this.fb.group({
     receiptsArray: this.fb.array([]),
   });
@@ -72,9 +73,22 @@ export class TarjetasComponent implements OnInit{
   }
 
 
-  addInput(event: any):void{
-    let currencyValue: number = parseFloat(event.target.value);
+  // addInput(event: any):void{
+  //   let currencyValue: number = parseFloat(event.target.value);
    
+  //   if (isNaN(currencyValue) || currencyValue <= 0){
+  //     return;
+  //   }
+
+  //   this.receiptsArray.push(this.fb.group({'currencyValue': currencyValue}));
+
+  //   let inputCards: HTMLInputElement = document.querySelector<HTMLInputElement>(`#input${this.currencyType}`);
+  //   inputCards.value = "";
+  //   this.calculateTotal();
+  // }
+
+  addInput(): void {
+    let currencyValue = parseFloat(this.currencyInputControl.value);
     if (isNaN(currencyValue) || currencyValue <= 0){
       return;
     }
