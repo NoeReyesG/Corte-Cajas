@@ -16,16 +16,19 @@ export class InitialConfigurationComponent implements OnInit{
   ){}
   
   branchs = [
-    {cacId: 612, cacName: 'Plaza las Palomas', withdrawalAmount: 40000, bankDepositReference: '050000000512'}, 
+    {cacId: 612, cacName: 'Plaza las Palomas', withdrawalAmount: 40000, bankDepositReference: '050000000511'}, 
     {cacId: 804, cacName:'Centro Comercial Sentura', withdrawalAmount:20000, bankDepositReference: '050000000572'}
   ]
 
   cashiers = [
-    {idEmployee: 43115,  name: 'Noé Macario Reyes González'},
+    
+
     {idEmployee: 27478,  name: 'María Isabel Morales Jasso'},
+    {idEmployee: 10000,  name: 'Ana Dolores García Rivera'},
     {idEmployee: 42099,  name: 'Sonia Guadalupe Mendoza Cortes'},
     {idEmployee: 56838, name: 'Gloria Angelica Mauricio Magaña'},
     {idEmployee: 61725, name: 'Martha Patricia Zamora Ramirez'},
+    {idEmployee: 43115,  name: 'Noé Macario Reyes González'},
   ]
   
 

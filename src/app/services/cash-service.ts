@@ -22,6 +22,9 @@ export class CashService {
         credit_notes: 0
     });
 
+    private displayNavBar: BehaviorSubject<boolean> = new BehaviorSubject(true);
+
+
     // public CACConfiguration = new BehaviorSubject({
     //   withDrawals: 0,
     //   cashierName: '',
