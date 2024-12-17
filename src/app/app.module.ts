@@ -30,6 +30,7 @@ import { FooterComponent } from './footer/footer.component';
 import { InitialConfigurationComponent } from './initial-configuration/initial-configuration.component';
 import { ShortcutsComponent } from './shortcuts/shortcuts.component';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { AvisosComponent } from './avisos/avisos.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
     OpenTotalsButtonComponent,
     FooterComponent,
     InitialConfigurationComponent,
-    ShortcutsComponent
+    ShortcutsComponent,
+    AvisosComponent
   ],
   imports: [
     BrowserModule,

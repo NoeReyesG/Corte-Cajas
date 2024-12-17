@@ -97,6 +97,7 @@ export class TarjetasComponent implements OnInit{
 
     let inputCards: HTMLInputElement = document.querySelector<HTMLInputElement>(`#input${this.currencyType}`);
     inputCards.value = "";
+    this.currencyInputControl.reset();
     this.calculateTotal();
   }
 
